@@ -13,6 +13,10 @@
 				<div class="col-xs-12 text-right">
 					<form action="" method="post">
 						<div class="form-group text-left">
+							<label>Title</label>
+							<input type="text" class="form-control" name="title" value="{{old('title')??($data->title??null)}}"/><br>
+						</div>
+						<div class="form-group text-left">
 							<label>Type (Unique)</label>
 							<input type="text" class="form-control" name="type" value="{{old('type')??($data->type??null)}}"/><br>
 						</div>

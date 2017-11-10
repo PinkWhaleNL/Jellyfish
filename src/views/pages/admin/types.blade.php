@@ -18,6 +18,7 @@
 					<tr>
 						<td>ID</td>
 						<td>Type</td>
+						<td>Title</td>
 						<td>Rows</td>
 						<td>Action</td>
 					</tr>
@@ -27,6 +28,7 @@
 					<tr>
 						<td>{{$type->id}}</td>
 						<td>{{$type->type}}</td>
+						<td>{{$type->title}}</td>
 						<td>0</td>
 						<td>
 							<a href="{{route('jelly-admin-type',[$type->id])}}">Edit</a> |
