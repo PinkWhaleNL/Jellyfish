@@ -15,7 +15,9 @@ Route::group(['middleware'=>'web', 'namespace'=>'Pinkwhale\Jellyfish\Controllers
         Route::get('dashboard', 'DashboardController@show')->name('jelly-dashboard');
 
         // Media
-        Route::get('media', 'MediaController@show')->name('jelly-media');
+        Route::get('media', 'MediaController@index')->name('jelly-media');
+        Route::get('media/{id}', 'MediaController@show')->name('jelly-media-show');
+        Route::post('media/{id}', 'MediaController@store');
 
         // Modules.
         Route::get('modules/{name}', 'TypesController@index')->name('jelly-modules');

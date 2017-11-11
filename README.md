@@ -1,1 +1,4 @@
-npm install simplemde --save
+
+## Intervention
+composer require intervention/image
+
