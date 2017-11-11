@@ -34,6 +34,8 @@ class TypesController extends Controller
         $fields = request()->all();
         unset($fields['_token']);
 
+        dd($fields);
+
         $content = (new Content);
         $content->type = $type;
         $content->data = json_encode($fields);
