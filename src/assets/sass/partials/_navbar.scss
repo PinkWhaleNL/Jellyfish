@@ -1,0 +1,36 @@
+.navbar-default{
+  margin-bottom:0px !important;
+  border-radius: 0px;
+  border:0px !important;
+  background:$pink;
+  .navbar-brand{
+    text-align: center;
+    font-family: Rajdhani;
+    color:#fff;
+    &:hover{
+      color:#fff;
+    }
+  }
+
+  li{
+    > a{
+      color:#fff !important;
+      font-weight:400;
+    }
+    &.active{
+      a{
+        background:lighten($pink,20) !important;
+      }
+    }
+    &.open > a{
+      background:lighten($pink,30) !important;
+    }
+  }
+
+  ul.dropdown-menu{
+    li a{
+      color:#f0f !important;
+    }
+  }
+
+}

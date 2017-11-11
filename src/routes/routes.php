@@ -13,6 +13,11 @@ Route::group(['middleware'=>'web', 'namespace'=>'Pinkwhale\Jellyfish\Controllers
     Route::group(['middleware'=>'Pinkwhale\Jellyfish\Middleware\Auth'],function(){
 
         Route::get('dashboard', 'DashboardController@show')->name('jelly-dashboard');
+
+        // Media
+        Route::get('media', 'MediaController@show')->name('jelly-media');
+
+        // Modules.
         Route::get('modules/{name}', 'TypesController@index')->name('jelly-modules');
         Route::get('modules/{name}/{id}', 'TypesController@show')->name('jelly-module');
         Route::post('modules/{name}/{id}', 'TypesController@store');

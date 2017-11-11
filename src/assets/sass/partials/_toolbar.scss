@@ -1,0 +1,37 @@
+$heighttoolbar: 70px;
+
+section#toolbar{
+
+  margin:0px; padding:0px;
+  background:#fff;
+  height:$heighttoolbar;
+  line-height:$heighttoolbar;
+  border-bottom:1px solid #e5e5e5;
+  margin-bottom:20px !important;
+  h1{
+    margin:0px; padding:0px;
+    font-size:20px;
+    line-height:$heighttoolbar;
+    float:left;
+  }
+
+  ul#buttons{
+    height:$heighttoolbar;
+    li{
+      padding:0px 5px;
+      font-size:12px;
+      list-style-type: none;
+      height:20px;
+      line-height:$heighttoolbar;
+      float:right;
+      a{
+        border-radius:0px;
+        &.btn-primary{
+          background:$pink;
+          border-color:$pink;
+        }
+      }
+    }
+  }
+
+}

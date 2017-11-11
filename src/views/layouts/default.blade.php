@@ -15,7 +15,7 @@
 </head>
 <body>
 <nav class="navbar navbar-default">
-	<div class="container-fluid">
+	<div class="container">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -31,7 +31,7 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Dashboard</a></li>
-				<li><a href="#">Media</a></li>
+				<li><a href="{{route('jelly-media')}}">Media</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Modules <span class="caret"></span></a>
 					<ul class="dropdown-menu">
@@ -64,6 +64,17 @@
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 </nav>
+
+@if($__env->yieldContent('toolbar'))
+<section id="toolbar">
+	<div class="container">
+		@yield('toolbar')
+		<ul id="buttons" class="pull-right">
+			@yield('buttons')
+		</ul>
+	</div>
+</section>
+@endif
 
 <section id="content">
 	@yield('content')
