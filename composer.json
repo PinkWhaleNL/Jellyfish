@@ -1,34 +1,34 @@
 {
-    "name": "pinkwhalenl/jellyfish",
-    "description": "",
-    "keywords": [],
-    "homepage": "https://pinkwhale.io",
-    "authors": [
-        {
-            "name": "Jasper Berkhout",
-            "email": "jasper@pinkwhale.io"
-        }
-    ],
-    "require": {
-        "illuminate/support": "~5.5",
-        "graham-campbell/markdown": "^8.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "~6.0",
-        "orchestra/testbench": "~3.5"
-    },
-    "autoload": {
-       "psr-4": {
-            "Pinkwhale\\Jelly\\": "src"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Pinkwhale\\Jellyfish\\Package\\PackageServiceProvider"
-            ]
-        }
-    },
-    "license": "MIT"
-    
+  "name": "pinkwhalenl/jellyfish",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://pinkwhale.io",
+  "authors": [
+    {
+      "name": "Jasper Berkhout",
+      "email": "jasper@pinkwhale.io"
+    }
+  ],
+  "require": {
+    "illuminate/support": "~5.5",
+    "graham-campbell/markdown": "^8.0",
+    "intervention/image": "^2.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~6.0",
+    "orchestra/testbench": "~3.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Pinkwhale\\Jelly\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Pinkwhale\\Jellyfish\\Package\\PackageServiceProvider"
+      ]
+    }
+  },
+  "license": "MIT"
 }

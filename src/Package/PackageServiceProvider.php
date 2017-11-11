@@ -5,6 +5,8 @@ namespace Pinkwhale\Jellyfish;
 use Illuminate\Support\ServiceProvider;
 use Vendor\Package\Commands\FooCommand;
 
+use Illuminate\Foundation\AliasLoader;
+
 /**
  * A Laravel 5.5 package boilerplate
  *
@@ -68,7 +70,7 @@ class PackageServiceProvider extends ServiceProvider {
         ], 'config');
 
         if ($this->app->runningInConsole()) {
-            $this->commands($this->commands);
+            //$this->commands($this->commands);
         }
     }
 
@@ -79,6 +81,15 @@ class PackageServiceProvider extends ServiceProvider {
      */
     public function register()
     {
+        $this->app->register('Intervention\Image\ImageServiceProvider');
+        $this->app->register('GrahamCampbell\Markdown\MarkdownServiceProvider');
+
+        AliasLoader::getInstance()->alias('Jelly','Pinkwhale\Jellyfish\Models\Content');
+        AliasLoader::getInstance()->alias('JellyAuth','Pinkwhale\Jellyfish\Models\Users');
+        AliasLoader::getInstance()->alias('Image','Intervention\Image\Facades\Image');
+        AliasLoader::getInstance()->alias('Carbon','Carbon\Carbon');
+        AliasLoader::getInstance()->alias('Markdown','GrahamCampbell\Markdown\Facades\Markdown');
+
         $this->mergeConfigFrom(
             __DIR__.'/../config/config.php', $this->packageName
         );
