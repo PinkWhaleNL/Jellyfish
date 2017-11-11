@@ -20,6 +20,7 @@ class MediaController extends Controller {
 
     public function index() {
         $this->info['list'] = (new Media)->orderBy('updated_at', 'desc')->get();
+        $this->info['storage_size'] = $this->TotalStorage();
 
         return view('jf::pages.media_list', $this->info);
     }
@@ -58,13 +59,103 @@ class MediaController extends Controller {
 
             $file->type = 'attachment';
             $filename = request()->file('file')->store(
-                'files', 'app'
+                'files'
             );
             $file->filename = str_replace('files/', '', $filename);
         }
         $file->save();
 
-        return redirect()->route('jelly-media')->with(['message'=>'OK!']);
+        return redirect()->route('jelly-media')->with(['message' => ['state' => 'success', 'message' => 'Upload afgerond!']]);
+    }
+
+    /**
+     * @param $filename
+     *
+     * @return mixed
+     */
+    public function displayPicture($filename) {
+        $strip = explode('_', $filename);
+
+        if ( $strip[0] != 'file' ) {
+            $file = (new Media)->where('filename', $strip[1])->where('type', 'picture')->first();
+            if ( $file == null ) $filename = 'noimage.png';
+            if ( !Storage::exists('pictures/' . $filename) ) {
+                abort(404, 'File not found!');
+            }
+            $img = Image::make(Storage::get('pictures/' . $filename));
+        } else {
+            $file = (new Media)->where('filename', $strip[1])->where('type', 'attachment')->first();
+            if ( !Storage::exists('files/' . $strip[1]) ) {
+                abort(404, 'File not found!');
+            }
+            if ( $file == null ) $filename = 'noimage.png';
+
+            $mimes = str_replace('/Controllers', null, __DIR__) . '/assets/default_images/mimes';
+            $type = explode('/', Storage::mimeType('files/' . $strip[1]))[1];
+            $file_to_open = $mimes . '/' . $type . '.png';;
+            if ( file_exists($file_to_open) ) $img = Image::make($file_to_open);
+            else $img = Image::make($mimes . '/_blank.png');
+
+            $img = $img->greyscale();
+        }
+
+        return $img->response();
+    }
+
+    public function download($id) {
+
+        $file = (new Media)->where('id', $id)->firstOrFail();
+        if ( $file->type == 'attachment' && Storage::exists('files/' . $file->filename) ) {
+            return response()->download(storage_path('app/files/') . $file->filename);
+        } else {
+            $img = Image::make(Storage::get('pictures/big_' . $file->filename));
+
+            return $img->response();
+        }
+
+
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function destroy($id) {
+
+        $file = (new Media)->where('id', $id)->firstOrFail();
+        if ( $file->type == 'attachment' && Storage::exists('files/' . $file->filename) ) {
+            Storage::delete('files/' . $file->filename);
+            $file->delete();
+        } else {
+            Storage::delete('pictures/small_' . $file->filename);
+            Storage::delete('pictures/medium_' . $file->filename);
+            Storage::delete('pictures/big_' . $file->filename);
+            $file->delete();
+        }
+
+        return redirect()->route('jelly-media')->with(['message' => ['state' => 'success', 'message' => 'verwijderd!']]);
+    }
+
+    public function TotalStorage() {
+
+        $file_size = 0;
+        if ( Storage::exists('pictures') )
+            foreach ( Storage::allFiles('pictures') as $pic )
+                $file_size += Storage::size($pic);
+
+        if ( Storage::exists('files') )
+            foreach ( Storage::allFiles('files') as $file )
+                $file_size += Storage::size($file);
+
+        return $this->formatBytes($file_size);
+    }
+
+    private function formatBytes($size, $precision = 2) {
+        $base = log($size, 1024);
+        $suffixes = ['', 'K', 'M', 'G', 'T'];
+
+        return round(pow(1024, $base - floor($base)), $precision) . ' ' . $suffixes[floor($base)];
     }
 
 }

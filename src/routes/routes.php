@@ -4,6 +4,9 @@
  * You may define custom routes for your package here
  */
 
+Route::get('/media/picture/{unique}', 'Pinkwhale\Jellyfish\Controllers\MediaController@displayPicture')->name('media-picture');
+Route::get('/media/file/{unique}', 'Pinkwhale\Jellyfish\Controllers\Admin\MediaController@displayFile')->name('media');
+
 Route::group(['middleware'=>'web', 'namespace'=>'Pinkwhale\Jellyfish\Controllers','prefix'=>config('jf.slug')],function(){
 
     Route::redirect('/',config('jf.slug').'/dashboard');
@@ -18,6 +21,7 @@ Route::group(['middleware'=>'web', 'namespace'=>'Pinkwhale\Jellyfish\Controllers
         Route::get('media', 'MediaController@index')->name('jelly-media');
         Route::get('media/{id}', 'MediaController@show')->name('jelly-media-show');
         Route::post('media/{id}', 'MediaController@store');
+        Route::post('media-remove/{id}', 'MediaController@destroy')->name('jelly-media-remove');
 
         // Modules.
         Route::get('modules/{name}', 'TypesController@index')->name('jelly-modules');

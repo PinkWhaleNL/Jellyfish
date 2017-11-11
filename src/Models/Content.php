@@ -8,5 +8,7 @@ class Content extends Model
 {
     protected $table = 'jelly_content';
 
-
+    public function json(){
+        return json_decode($this->data);
+    }
 }

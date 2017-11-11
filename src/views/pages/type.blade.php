@@ -1,6 +1,12 @@
 @extends('jf::layouts.default')
 
+@section('toolbar')
+	<h1>{{!isset($content->id) ? 'Nieuw document' : 'Berwerken van je document'}}</h1>
+@endsection
+
 @section('content')
+
+
 
 	<div class="container">
 

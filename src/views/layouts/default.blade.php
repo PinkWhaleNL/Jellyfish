@@ -85,5 +85,12 @@
 </div>
 <script src="{{ mix('js/jelly_default.js') }}"></script>
 
+@if(session()->has('message'))
+	<script type="text/javascript">
+		swal("{{session('message')['message']}}","", "{{session('message')['state']}}");
+	</script>
+@endif
+
+
 </body>
 </html>
