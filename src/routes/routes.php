@@ -27,6 +27,7 @@ Route::group(['middleware'=>'web', 'namespace'=>'Pinkwhale\Jellyfish\Controllers
         Route::get('modules/{name}', 'TypesController@index')->name('jelly-modules');
         Route::get('modules/{name}/{id}', 'TypesController@show')->name('jelly-module');
         Route::post('modules/{name}/{id}', 'TypesController@store');
+        Route::post('modules-remove/{name}/{id}', 'TypesController@destroy')->name('jelly-content-remove');
 
         Route::group(['middleware'=>'Pinkwhale\Jellyfish\Middleware\IsAdmin'], function(){
             Route::get('administrator','AdminController@redirect')->name('jelly-admin');

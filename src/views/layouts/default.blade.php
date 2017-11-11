@@ -42,20 +42,14 @@
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				@if(JellyAuth::IsAdmin())
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administrator <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="{{route('jelly-admin-types')}}">Types</a></li>
-						</ul>
-					</li>
-				@endif
+
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{JellyAuth::user()->name}} <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Action</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
+						@if(JellyAuth::IsAdmin())
+						<li role="separator" class="divider"></li>
+						<li><a href="{{route('jelly-admin-types')}}"><b>Admin - </b>Modules</a></li>
+						@endif
 						<li role="separator" class="divider"></li>
 						<li><a href="{{route('jelly-logout')}}">Uitloggen</a></li>
 					</ul>

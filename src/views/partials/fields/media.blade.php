@@ -2,6 +2,10 @@
 
 	<label for="{{$value->name}}">{{$value->title??null}} {!! isset($value->required) && $value->required == true ? '<span style="color:red;">*</span>':null !!}</label>
 
+	@php
+		$db = isset($old[$value->name]) && !empty($old[$value->name]) ? old($value->name) : isset($db[$value->name]) ? $db[$value->name] : null;
+	@endphp
+
 	<select name="{{$value->name??null}}"
 			class="selectpicker form-control"
 			placeholder="{{$value->placeholder??null}}" {!! isset($value->required) && $value->required == true ? ' required':null !!}
@@ -19,7 +23,9 @@
 		@foreach($list->get() as $file)
 			<option
 					value="{{$file->id}}" data-live-search="true"
-			        data-content="<img height=50 src='{{route('media-picture',[($file->type=='attachment'?'file_':'small_').$file->filename])}}'/> {{$file->title}} ({{Carbon::parse($file->updated_at)->format('d-m-Y')}})">{{$file->title}}
+			        data-content="<img height=50 src='{{route('media-picture',[($file->type=='attachment'?'file_':'small_').$file->filename])}}'/> {{$file->title}} ({{Carbon::parse($file->updated_at)->format('d-m-Y')}})"
+			        {{$db == $file->id ? ' selected' : null}}
+			>
 	        </option>
 		@endforeach
 

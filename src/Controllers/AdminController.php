@@ -5,6 +5,7 @@ namespace Pinkwhale\Jellyfish\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Pinkwhale\Jellyfish\Models\Types;
+use Pinkwhale\Jellyfish\Models\Content;
 
 class AdminController extends Controller
 {
@@ -36,7 +37,10 @@ class AdminController extends Controller
     }
 
     public function destroy_type($id){
-        (new Types)->where('id',$id)->delete();
+
+        $type = (new Types)->where('id',$id)->first();
+        (new Content)->where('type', $type->type)->delete();
+        $type->delete();
         return redirect()->route('jelly-admin-types');
     }
 }

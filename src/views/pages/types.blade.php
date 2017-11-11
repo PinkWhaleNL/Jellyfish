@@ -2,7 +2,7 @@
 
 
 @section('toolbar')
-	<h1>Documents</h1>
+	<h1>Documenten in {{ucfirst($data->type)}}</h1>
 @endsection
 
 @section('buttons')
@@ -21,7 +21,7 @@
 				<thead>
 					<tr>
 						<td>#</td>
-						@foreach(array_slice($data->json()->fields,0,4) as $item)
+						@foreach(array_slice($data->json()->fields,0,3) as $item)
 					 	<td>{{$item->title}}</td>
 						@endforeach
 						<td align="right">Laatste update</td>
@@ -32,7 +32,7 @@
 					@foreach($documents as $doc)
 						<tr>
 							<td>{{$doc->id}}</td>
-							@foreach(array_slice($data->json()->fields,0,4) as $item)
+							@foreach(array_slice($data->json()->fields,0,3) as $item)
 								@php
 									$name = $item->name;
 									$content = (array)$doc->json();
@@ -41,8 +41,15 @@
 								@if($item->type == 'markdown')
 								<td>{{str_limit(strip_tags(Markdown::convertToHtml(($content[$name]??null))),40)}}</td>
 								@elseif($item->type == 'media')
+									@php
+										$file = (new \Pinkwhale\Jellyfish\Models\Media)->where('id',($content[$name]??null))->first();
+									@endphp
 								<td>
-
+									@if(isset($file->type)&&$file->type == 'picture')
+										<img height="80" src="{{route('media-picture',['small_'.$file->filename])}}" alt="{{$file->title}}" title="{{$file->title}}"/>
+									@elseif(isset($file->type)&&$file->type == 'attachment')
+										<img height="80" src="{{route('media-picture',['file_'.$file->filename])}}" alt="{{$file->title}}" title="{{$file->title}}"/>
+									@endif
 								</td>
 								@else
 								<td>{{$content[$name]??null}}</td>
@@ -50,7 +57,11 @@
 							@endforeach
 							<td align="right">{{Carbon::parse($doc->updated_at)->format('d-m-Y H:i')}}</td>
 							<td align="right">
-								Edit
+								<a href="{{route('jelly-module',[$data->type,$doc->id])}}" class="btn btn-default btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Aanpassen</a>
+								<form action="{{route('jelly-content-remove',[$data->type,$doc->id])}}" method="post" style="display:inline">
+									{{csrf_field()}}
+									<button class="btn btn-danger btn-xs" onclick="return confirm('Verwijderen?')"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+								</form>
 							</td>
 						</tr>
 					@endforeach

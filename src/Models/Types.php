@@ -3,6 +3,7 @@
 namespace Pinkwhale\Jellyfish\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Pinkwhale\Jellyfish\Models\Content;
 
 class Types extends Model
 {
@@ -28,5 +29,9 @@ class Types extends Model
         }
 
         return $rules;
+    }
+
+    public function rows(){
+        return (new Content)->where('type',$this->type)->count();
     }
 }

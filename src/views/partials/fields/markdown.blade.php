@@ -4,7 +4,7 @@
 	          placeholder="{{$value->placeholder??null}}"
 	          class="from-control"
 	          id="md_{{$value->name??null}}"
-	></textarea>
+	>{{isset($old[$value->name]) && !empty($old[$value->name]) ? old($value->name) : isset($db[$value->name]) ? $db[$value->name] : null}}</textarea>
 	{!! $errors->first($value->name, '<p class="help-block">:message</p>') !!}
 </div>
 

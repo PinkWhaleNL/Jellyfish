@@ -6,7 +6,7 @@
 	       name="{{$value->name??null}}"
 	       class="form-control"
 	       id="{{$value->name}}"
-	       value=""
+	       value="{{isset($old[$value->name]) && !empty($old[$value->name]) ? old($value->name) : isset($db[$value->name]) ? $db[$value->name] : null}}"
 	       placeholder="{{$value->placeholder??null}}" {!! isset($value->required) && $value->required == true ? ' required':null !!}
 	/>
 
