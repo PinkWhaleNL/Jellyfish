@@ -22,6 +22,13 @@ class CreateJellyUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::table('jelly_users')->insert([
+            'rank' => 'admin',
+            'name' => 'Default Admin',
+            'email' => 'info@pinkwhale.io',
+            'password' => bcrypt('secret'),
+        ]);
     }
 
     /**
