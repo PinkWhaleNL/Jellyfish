@@ -1,17 +1,12 @@
 <?php 
 
-namespace Pinkwhale\Jellyfish;
+namespace Pinkwhale\Jellyfish\Package;
 
 use Illuminate\Support\ServiceProvider;
 use Vendor\Package\Commands\FooCommand;
 
 use Illuminate\Foundation\AliasLoader;
 
-/**
- * A Laravel 5.5 package boilerplate
- *
- * @author: Rémi Collin (remi@code16.fr)
- */
 class PackageServiceProvider extends ServiceProvider {
 
     /**
@@ -40,38 +35,18 @@ class PackageServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
+
+        // Load needed data.
         $this->loadRoutesFrom(__DIR__.'/../routes/routes.php');
-
-        // Register Views from your package
         $this->loadViewsFrom(__DIR__.'/../views', $this->packageName);
-
-        // Regiter migrations
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
-        // Register translations
         $this->loadTranslationsFrom(__DIR__.'/../lang', $this->packageName);
-        $this->publishes([
-            __DIR__.'/../lang' => resource_path('lang/vendor/'. $this->packageName),
-        ]);
 
-        // Register your asset's publisher
-        $this->publishes([
-            __DIR__.'/../assets' => public_path('vendor/'.$this->packageName),
-        ], 'public');
-
-        // Publish your seed's publisher
-        $this->publishes([
-            __DIR__.'/../database/seeds/' => base_path('/database/seeds')
-        ], 'seeds');
-
-        // Publish your config
-        $this->publishes([
-            __DIR__.'/../config/config.php' => config_path($this->packageName.'.php'),
-        ], 'config');
-
-        if ($this->app->runningInConsole()) {
-            //$this->commands($this->commands);
-        }
+        // Publish data into right folder.
+        $this->publishes([__DIR__.'/../lang' => resource_path('lang/vendor/'. $this->packageName)]);
+        $this->publishes([__DIR__.'/../assets/build' => public_path('vendor/jellyfish')], 'public');
+        //$this->publishes([__DIR__.'/../database/seeds/' => base_path('/database/seeds')], 'seeds');
+        $this->publishes([__DIR__.'/../config/config.php' => config_path($this->packageName.'.php')], 'config');
     }
 
     /**
