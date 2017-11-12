@@ -43,6 +43,7 @@ class PackageServiceProvider extends ServiceProvider {
         // Publish data into right folder.
         $this->publishes([__DIR__.'/lang' => resource_path('lang/vendor/'. $this->packageName)]);
         $this->publishes([__DIR__.'/assets/builds' => public_path('vendor/jellyfish')], 'public');
+        $this->publishes([__DIR__.'/assets/fonts' => public_path('fonts')], 'public');
         $this->publishes([__DIR__.'/config/config.php' => config_path($this->packageName.'.php')], 'config');
     }
 
