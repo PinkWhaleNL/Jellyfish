@@ -10,6 +10,6 @@
     'title'         => 'Controlpanel',
     'title_browser' => 'Controlpanel Pinkwhale',
 
-    'slug' => 'jellyfish',
+    'slug' => 'backend',
 
 ];
