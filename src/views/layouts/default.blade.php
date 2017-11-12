@@ -1,5 +1,6 @@
+@include('jf::partials.copyright')
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
 
 	<title>Jellyfish</title>
@@ -7,7 +8,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<link href="{{ mix('css/jelly_default.css') }}" rel="stylesheet">
+	<link href="{{ asset('vendor/jellyfish/css/jelly_default.css') }}" rel="stylesheet">
 	<link href="{{ URL::asset('apple-touch-icon.png')}}" rel="apple-touch-icon">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -74,10 +75,7 @@
 	@yield('content')
 </section>
 
-<div class="col-xs-12 text-center">
-	<br><small>{{exec('git describe --tags --abbrev=0')}}</small>
-</div>
-<script src="{{ mix('js/jelly_default.js') }}"></script>
+<script src="{{ asset('vendor/jellyfish/js/jelly_default.js') }}"></script>
 
 @if(session()->has('message'))
 	<script type="text/javascript">

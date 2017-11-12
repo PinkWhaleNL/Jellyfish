@@ -1,5 +1,6 @@
+@include('jf::partials.copyright')
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
 
 	<title>Even inloggen a.u.b.</title>
