@@ -19,12 +19,5 @@
       "Pinkwhale\\Jelly\\": "src"
     }
   },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Pinkwhale\\Jellyfish\\Package\\PackageServiceProvider"
-      ]
-    }
-  },
   "license": "MIT"
 }
