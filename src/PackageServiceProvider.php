@@ -35,16 +35,16 @@ class PackageServiceProvider extends ServiceProvider {
     {
 
         // Load needed data.
-        $this->loadRoutesFrom(__DIR__.'/../routes/routes.php');
-        $this->loadViewsFrom(__DIR__.'/../views', $this->packageName);
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadTranslationsFrom(__DIR__.'/../lang', $this->packageName);
+        $this->loadRoutesFrom(__DIR__.'/routes/routes.php');
+        $this->loadViewsFrom(__DIR__.'/views', $this->packageName);
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadTranslationsFrom(__DIR__.'/lang', $this->packageName);
 
         // Publish data into right folder.
-        $this->publishes([__DIR__.'/../lang' => resource_path('lang/vendor/'. $this->packageName)]);
-        $this->publishes([__DIR__.'/../assets/builds' => public_path('vendor/jellyfish')], 'public');
-        //$this->publishes([__DIR__.'/../database/seeds/' => base_path('/database/seeds')], 'seeds');
-        $this->publishes([__DIR__.'/../config/config.php' => config_path($this->packageName.'.php')], 'config');
+        $this->publishes([__DIR__.'/lang' => resource_path('lang/vendor/'. $this->packageName)]);
+        $this->publishes([__DIR__.'/assets/builds' => public_path('vendor/jellyfish')], 'public');
+        //$this->publishes([__DIR__.'/database/seeds/' => base_path('/database/seeds')], 'seeds');
+        $this->publishes([__DIR__.'/config/config.php' => config_path($this->packageName.'.php')], 'config');
     }
 
     /**
@@ -64,7 +64,7 @@ class PackageServiceProvider extends ServiceProvider {
         AliasLoader::getInstance()->alias('Markdown','GrahamCampbell\Markdown\Facades\Markdown');
 
         $this->mergeConfigFrom(
-            __DIR__.'/../config/config.php', $this->packageName
+            __DIR__.'/config/config.php', $this->packageName
         );
 
     }
