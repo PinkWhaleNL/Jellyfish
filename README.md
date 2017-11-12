@@ -1,8 +1,8 @@
 
-## Intervention
-composer require intervention/image
+# JellyFish - Easy CMS system.
 
-composer require graham-campbell/markdown
+1. First install `composer require pinkwhalenl/jellyfish`.
+2. Publish all css,js and font files. `php artisan vendor:publish --provider="Pinkwhale/Jellyfish/PackageServiceProvider"`
 
 
 @foreach(Jelly::Module('articles')->get() as $article)
