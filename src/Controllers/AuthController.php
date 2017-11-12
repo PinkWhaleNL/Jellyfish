@@ -23,7 +23,7 @@ class AuthController extends Controller
         ]);
 
         // Check standard validation rules. If user exists in DB. Go one.
-        if ($validator->fails()) { return back()->withErrors($validator); }
+        if ($validator->fails()) { return back()->withErrors($validator)->withInput(); }
 
         // Compare password with DB one.
         $user = (new Users)->where('email',request()->username)->first();
@@ -34,7 +34,7 @@ class AuthController extends Controller
         });
 
         // If the password check fails.
-        if ($validator->fails()) { return back()->withErrors($validator); }
+        if ($validator->fails()) { return back()->withErrors($validator)->withInput(); }
 
         // Otherwise create Jelly session.
         return (new Session)->CreateJellySession($user);

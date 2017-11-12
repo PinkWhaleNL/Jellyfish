@@ -1,24 +1,21 @@
 @extends('jf::layouts.default')
 
+@section('toolbar')
+	<h1>Dashboard</h1>
+@endsection
+
 @section('content')
-
-
-	<div class="col-xs-12">
-		<ul>
-
-			<li>
-				<h1></h1>
-				<p></p>
-			</li><li>
-				<h1>{{$item->title??null}}</h1>
-				<p></p>
-			</li><li>
-				<h1></h1>
-				<p></p>
-			</li><li>
-				<h1></h1>
-				<p></p>
-			</li>
-		</ul>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				Binnenkort meer op dit scherm..<br>
+				<br>
+				<b>Ga naar;</b><br>
+				&bull; <a href="{{route('jelly-media')}}">Mediabeheer</a><br>
+				@foreach((new \Pinkwhale\Jellyfish\Models\Types)->all() as $type)
+					&bull; <a href="{{route('jelly-modules',[$type->type])}}"><u>[Module]</u> - {{$type->title}}</a><br>
+				@endforeach
+			</div>
+		</div>
 	</div>
 @endsection

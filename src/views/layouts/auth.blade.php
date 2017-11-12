@@ -24,11 +24,15 @@
 					<h1>Login</h1>
 					<form action="" method="post">
 						{{csrf_field()}}
-						<label>USERNAME</label>
-						<input type="text" name="username" class="form-control" value=""/>
-						<br>
-						<label>PASSWORD</label>
-						<input type="password" name="password" class="form-control" value=""/>
+						<div class="form-group{{ $errors->has('username') ? ' has-error' : ''}}">
+							<label>Gebruikersnaam</label>
+							<input type="text" name="username" class="form-control" value="{{old('username')}}"/>
+							{!! $errors->has('username') ? '<p class="help-block">Gebruikersnaam of wachtwoord onjuist!</p>' : null !!}
+						</div>
+						<div class="form-group{{ $errors->has('username') ? ' has-error' : ''}}">
+							<label>Wachtwoord</label>
+							<input type="password" name="password" class="form-control" value=""/>
+						</div>
 						<br>
 						<input type="submit" value="Go!" class="btn btn-primary"/>
 					</form>
