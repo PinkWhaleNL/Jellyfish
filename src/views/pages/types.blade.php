@@ -24,8 +24,8 @@
 						@foreach(array_slice($data->json()->fields,0,3) as $item)
 					 	<td>{{$item->title}}</td>
 						@endforeach
-						<td align="right">Laatste update</td>
-						<td align="right"></td>
+						<td align="right" width="150">Laatste update</td>
+						<td align="right" width="150"></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -52,7 +52,7 @@
 									@endif
 								</td>
 								@else
-								<td>{{$content[$name]??null}}</td>
+								<td>{{str_limit($content[$name]??null,60)}}</td>
 								@endif
 							@endforeach
 							<td align="right">{{Carbon::parse($doc->updated_at)->format('d-m-Y H:i')}}</td>
