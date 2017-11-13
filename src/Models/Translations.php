@@ -17,7 +17,6 @@ class Translations extends Model
         return json_decode($this->data,true)[$lang] ?? null;
     }
 
-
     /**
      * @param      $string
      * @param null $lang

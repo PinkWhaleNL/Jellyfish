@@ -22,19 +22,19 @@ You can pick a various types. Check the [wiki-page](https://github.com/PinkWhale
 }
 ```
 
-### Front-end
+## Front-end
 
-**Translations**
-On default jellyfish will recognize default laravel language. You can also force it to another language.
+### Translations   
+By default jellyfish will recognize laravel's language. You can also force it to another language.
+
 ```php
-{{Trans::get('home.title')}}
-```
-With language:
-```php
-{{Trans::get('home.title','nl')}}
+{{Trans::get('home.title')}} // Most basic.
+{{Trans::get('home.title','nl')}} // With language.
+{{Trans::get('home.title','nl','lorem:10')}} // With language + Lorem Ipsum.
+{{Trans::get('home.title',null,'lorem:10')}} // No language.
 ```
 
-**Query stuff from your modules.**
+### Query stuff from your modules.
 ```
 @foreach(Jelly::Module('articles')->get() as $article)
 	<li>{{var_dump($article->data(true))}}</li>
