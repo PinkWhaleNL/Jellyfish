@@ -50,14 +50,14 @@ You can check if a user has signed in by typing `JellyAuth::Check()` this functi
 ```php
 // Show button is signed in.
 @if(JellyAuth::Check())
-	<ul>
-		<li><a href="#">Click here..</a></li>
-	</ul>
+<ul>
+    <li><a href="#">Click here..</a></li>
+</ul>
 @endif
 
 // Check user is an Admin.
 @if(JellyAuth::IsAdmin())
-	<li><a href="#">[Admin] - Debtors..</a></li>
+    <li><a href="#">[Admin] - Debtors..</a></li>
 @endif
 
 // Get Userdata.

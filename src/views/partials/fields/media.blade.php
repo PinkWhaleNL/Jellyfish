@@ -6,6 +6,14 @@
 		$db = isset($old[$value->name]) && !empty($old[$value->name]) ? old($value->name) : isset($db[$value->name]) ? $db[$value->name] : null;
 	@endphp
 
+	@php
+		$list = (new Pinkwhale\Jellyfish\Models\Media);
+		if(isset($value->function) && in_array('picture',$value->function))
+			$list = $list->where('type','picture');
+		if(isset($value->function) && in_array('attachment',$value->function))
+			$list = $list->where('type','attachment');
+	@endphp
+
 	<select name="{{$value->name??null}}"
 			class="selectpicker form-control"
 			placeholder="{{$value->placeholder??null}}" {!! isset($value->required) && $value->required == true ? ' required':null !!}
@@ -14,17 +22,13 @@
 		<option value="none">No File</option>
 		@endif
 
-		@php
-			$list = (new Pinkwhale\Jellyfish\Models\Media);
-			if(isset($value->function) && in_array($value->function,['picture'])) $list = $list->where('type','picture');
-			if(isset($value->function) && in_array($value->function,['file'])) $list = $list->where('type','attachment');
-		@endphp
+
 
 		@foreach($list->get() as $file)
 			<option
-					value="{{$file->id}}" data-live-search="true"
-			        data-content="<img height=50 src='{{route('media-picture',[($file->type=='attachment'?'file_':'small_').$file->filename])}}'/> {{$file->title}} ({{Carbon::parse($file->updated_at)->format('d-m-Y')}})"
-			        {{$db == $file->id ? ' selected' : null}}
+				value="{{$file->id}}" data-live-search="true"
+		        data-content="<img height=50 src='{{route('media-picture',[($file->type=='attachment'?'file_':'small_').$file->filename])}}'/> {{$file->title}} ({{Carbon::parse($file->updated_at)->format('d-m-Y')}})"
+		        {{$db == $file->id ? ' selected' : null}}
 			>
 	        </option>
 		@endforeach
