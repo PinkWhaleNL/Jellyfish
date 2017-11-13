@@ -1,20 +1,21 @@
 <?php 
 
-/**
- * You may define custom routes for your package here
- */
-
+// Accessible by un-authenticated users.
 Route::get('/media/picture/{unique}', 'Pinkwhale\Jellyfish\Controllers\MediaController@displayPicture')->name('media-picture');
 Route::get('/media/file/{unique}', 'Pinkwhale\Jellyfish\Controllers\Admin\MediaController@displayFile')->name('media');
 
+// This group sets the namespace, prefix and the default laravel's web middleware.
 Route::group(['middleware'=>'web', 'namespace'=>'Pinkwhale\Jellyfish\Controllers','prefix'=>config('jf.slug')],function(){
 
+    // Redirect if no option has set.
     Route::redirect('/',config('jf.slug').'/dashboard');
-    // Auth.
+
+    // Authentication
     Route::resource('login', 'AuthController');
     Route::get('logout', 'AuthController@logout')->name('jelly-logout');
     Route::group(['middleware'=>'Pinkwhale\Jellyfish\Middleware\Auth'],function(){
 
+        // Main dashboard stuff.
         Route::get('dashboard', 'DashboardController@show')->name('jelly-dashboard');
 
         // Language
@@ -38,6 +39,7 @@ Route::group(['middleware'=>'web', 'namespace'=>'Pinkwhale\Jellyfish\Controllers
         Route::post('modules/{name}/{id}', 'TypesController@store');
         Route::post('modules-remove/{name}/{id}', 'TypesController@destroy')->name('jelly-content-remove');
 
+        // Admin stuff.
         Route::group(['middleware'=>'Pinkwhale\Jellyfish\Middleware\IsAdmin'], function(){
             Route::get('administrator','AdminController@redirect')->name('jelly-admin');
             Route::get('administrator/types','AdminController@index_types')->name('jelly-admin-types');
@@ -45,7 +47,5 @@ Route::group(['middleware'=>'web', 'namespace'=>'Pinkwhale\Jellyfish\Controllers
             Route::post('administrator/types-delete/{type}','AdminController@destroy_type')->name('jelly-admin-type-delete');
             Route::post('administrator/types/{type}','AdminController@store_type');
         });
-
     });
-
 });
