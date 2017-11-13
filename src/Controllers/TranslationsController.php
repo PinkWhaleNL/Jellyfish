@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Pinkwhale\Jellyfish\Models\Pages;
 use Pinkwhale\Jellyfish\Models\Translations;
 use Validator;
+use JellyAuth;
 
 class TranslationsController extends Controller {
 
@@ -26,6 +27,7 @@ class TranslationsController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create() {
+        if(!JellyAuth::IsAdmin()){ abort(403); }
         return view('jf::pages.translation_page_create');
     }
 
@@ -35,6 +37,9 @@ class TranslationsController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id) {
+
+
+
         $this->info['page'] = (new Pages)->where('id', $id)->firstOrFail();
         $this->info['rows'] = (new Translations)->orderBy('id', 'desc')->where('page_id', $id)->get();
 
@@ -45,6 +50,9 @@ class TranslationsController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store() {
+
+        if(!JellyAuth::IsAdmin()){ abort(403); }
+
         Validator::make(request()->all(), [
             'title' => 'required',
             'key'   => 'required|unique:jelly_translation_pages,key',

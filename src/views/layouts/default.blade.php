@@ -44,8 +44,10 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{JellyAuth::user()->name}} <span class="caret"></span></a>
 						<ul class="dropdown-menu">
+
 							@if(JellyAuth::IsAdmin())
 							<li role="separator" class="divider"></li>
+								<li><a href="{{route('jelly-admin-users')}}"><b>Admin - </b>Manage users</a></li>
 							<li><a href="{{route('jelly-admin-types')}}"><b>Admin - </b>Modules</a></li>
 							@endif
 							<li role="separator" class="divider"></li>

@@ -66,10 +66,12 @@
 								<td align="right" style="border-top:0px !important">
 									<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
 								</form>
+								@if(JellyAuth::IsAdmin())
 								<form action="{{route('jelly-translation-item-remove',[$row->id])}}" method="post" style="display:inline">
 									{{csrf_field()}}
 									<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Verwijderen?')"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
 								</form>
+								@endif
 
 								</td>
 							</tr>

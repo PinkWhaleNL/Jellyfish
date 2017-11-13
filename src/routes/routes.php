@@ -41,11 +41,20 @@ Route::group(['middleware'=>'web', 'namespace'=>'Pinkwhale\Jellyfish\Controllers
 
         // Admin stuff.
         Route::group(['middleware'=>'Pinkwhale\Jellyfish\Middleware\IsAdmin'], function(){
+
+            // Types routes.
             Route::get('administrator','AdminController@redirect')->name('jelly-admin');
             Route::get('administrator/types','AdminController@index_types')->name('jelly-admin-types');
             Route::get('administrator/types/{type}','AdminController@show_type')->name('jelly-admin-type');
             Route::post('administrator/types-delete/{type}','AdminController@destroy_type')->name('jelly-admin-type-delete');
             Route::post('administrator/types/{type}','AdminController@store_type');
+
+            // Managing Users.
+            Route::get('administrator/users','AdminController@list_users')->name('jelly-admin-users');
+            Route::get('administrator/users/{id}','AdminController@list_users')->name('jelly-admin-user');
+            Route::get('administrator/users/{id}','AdminController@show_user')->name('jelly-admin-user');
+            Route::post('administrator/user-delete/{id}','AdminController@destroy_user')->name('jelly-admin-user-delete');
+            Route::post('administrator/users/{id}','AdminController@store_user');
         });
     });
 });

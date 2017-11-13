@@ -6,7 +6,9 @@
 @endsection
 
 @section('buttons')
+	@if(JellyAuth::IsAdmin())
 	<li><a class="btn btn-default btn-sm" href="{{route('jelly-translation-create',['new'])}}"><i class="fa fa-plus fa-fw" aria-hidden="true"></i><span class="hidden-xs">Maak een nieuwe pagina</span></a></li>
+	@endif
 @endsection
 
 @section('content')
@@ -40,10 +42,12 @@
 						<td>{{Carbon::parse($page->updated_at)->format('d-m-Y H:i')}}</td>
 						<td align="right">
 							<a href="{{route('jelly-translation',[$page->id])}}" class="btn btn-default btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Beheer vertalingen</a>
+							@if(JellyAuth::IsAdmin())
 							<form action="{{route('jelly-translation-remove',[$page->id])}}" method="post" style="display:inline">
 								{{csrf_field()}}
 								<button class="btn btn-danger btn-sm" onclick="return confirm('Verwijderen, incl. alle vertalingen?')"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
 							</form>
+							@endif
 						</td>
 					</tr>
 					@endforeach
