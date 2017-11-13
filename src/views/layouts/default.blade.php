@@ -78,8 +78,6 @@
 	</script>
 	@endif
 	<footer class="col-xs-12 text-center" style="color:#666; font-size:11px;"><br>
-		<b>V{{exec('cd '.base_path().'/vendor/pinkwhalenl/jellyfish/; git describe --tags --abbrev=0')}}</b>
-		<span>|</span>
 		<a href="{{url(config('jf.footer_url'))}}" style="color:#919191" target="_blank"><small>{{config('jf.footer_company')}}</small></a>
 	</footer>
 </body>

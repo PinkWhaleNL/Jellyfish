@@ -74,10 +74,22 @@ class TranslationsController extends Controller {
     public function store_item($id) {
 
         if ( $id == 'new' ) {
-            Validator::make(request()->all(), [
-                'key'     => 'required|unique:jelly_translations,key',
+            $validator = Validator::make(request()->all(), [
+                'key'     => 'required',
                 'page_id' => 'required|exists:jelly_translation_pages,id',
-            ])->validate();
+            ]);
+
+            $validator->after(function ($validator) {
+                if((new Translations)->where('key',request()->key)->where('page_id',request()->page_id)->first() != null){
+                    $validator->errors()->add('key', 'Deze sleutel bestond al op deze pagina.');
+                }
+            });
+
+            if ($validator->fails()) {
+                return back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
 
             $item = (new Translations);
             $item->key = strtolower(str_slug(request()->key));
@@ -91,7 +103,7 @@ class TranslationsController extends Controller {
             $item->save();
         }
 
-        return redirect()->back()->with(['message' => ['state' => 'success', 'message' => 'Vertaling opgeslagen']]);
+        return redirect()->back()->with(['alert' => ['state' => 'success', 'message' => 'Vertaling opgeslagen']]);
     }
 
     /**

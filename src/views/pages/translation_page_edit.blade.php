@@ -12,6 +12,17 @@
 
 		<div class="row">
 			<div class="col-md-12">
+
+				@if(session()->has('alert'))
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<p class="alert alert-{{session('alert')['state']}}" style="margin-bottom:0px;">
+							{{session('alert')['message']}}
+						</p>
+					</div>
+				</div>
+				@endif
+
 				@if(JellyAuth::IsAdmin())
 				<div class="panel panel-default">
 					<div class="panel-body">
