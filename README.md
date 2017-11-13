@@ -41,6 +41,11 @@ By default jellyfish will recognize laravel's language. You can also force it to
 	<li>{{var_dump($article->data(true))}}</li>
 @endforeach
 ```
+### Images
+
+```html
+<img width="100" src="{{route('img',[$item->data()->picture,'size=100x100'])}}"/>
+```
 
 ### Authentications.
 

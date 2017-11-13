@@ -1,6 +1,7 @@
 <?php 
 
 // Accessible by un-authenticated users.
+Route::get('/media/image/{id}','Pinkwhale\Jellyfish\Controllers\MediaController@displayCustomImage')->name('img');
 Route::get('/media/picture/{unique}', 'Pinkwhale\Jellyfish\Controllers\MediaController@displayPicture')->name('media-picture');
 Route::get('/media/file/{unique}', 'Pinkwhale\Jellyfish\Controllers\Admin\MediaController@displayFile')->name('media');
 

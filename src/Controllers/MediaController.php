@@ -68,6 +68,31 @@ class MediaController extends Controller {
         return redirect()->route('jelly-media')->with(['message' => ['state' => 'success', 'message' => 'Upload afgerond!']]);
     }
 
+    public function displayCustomImage($id){
+
+        $expl = explode('.',$id);
+        $file = (new Media)->where('id', $expl[0])->where('type', 'picture')->first();
+
+        if($file != null && Storage::exists('pictures/big_'.$file->filename))
+            $path = storage_path('app/pictures/big_'.$file->filename);
+        else
+            $path = str_replace('/Controllers', null, __DIR__) . '/assets/default_images/mimes/_blank.png';
+
+        // Build Image.
+        $img = Image::make($path);
+
+        // Change size (canvas) when requested.
+        if(isset(request()->size) && count(explode('x',request()->size)) > 1){
+            $sizes = explode('x',request()->size);
+            $img->resize($sizes[0], null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->resizeCanvas($sizes[0], $sizes[1], 'center');
+        }
+
+        return $img->response();
+    }
+
     /**
      * @param $filename
      *
