@@ -11758,6 +11758,19 @@ body .table > tbody > tr.middle > td {
   vertical-align: middle;
 }
 
+body footer {
+  color: #666;
+  font-size: 11px;
+}
+
+body footer span {
+  margin: 0px 10px;
+}
+
+body footer a {
+  color: #919191;
+}
+
 .navbar-default {
   margin-bottom: 0px !important;
   border-radius: 0px;

@@ -8,18 +8,11 @@ use Illuminate\Foundation\AliasLoader;
 class PackageServiceProvider extends ServiceProvider {
 
     /**
-     * This will be used to register config & view in 
-     * your package namespace.
-     *
-     * --> Replace with your package name <--
-     * 
-     * @var  string
+     * @var string
      */
     protected $packageName = 'jf';
 
     /**
-     * A list of artisan commands for your package
-     * 
      * @var array
      */
     protected $commands = [
