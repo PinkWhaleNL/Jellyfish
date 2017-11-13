@@ -24,7 +24,17 @@ You can pick a various types. Check the [wiki-page](https://github.com/PinkWhale
 
 ### Front-end
 
-**List all rows from a module**
+**Translations**
+On default jellyfish will recognize default laravel language. You can also force it to another language.
+```php
+{{Trans::get('home.title')}}
+```
+With language:
+```php
+{{Trans::get('home.title','nl')}}
+```
+
+**Query stuff from your modules.**
 ```
 @foreach(Jelly::Module('articles')->get() as $article)
 	<li>{{var_dump($article->data(true))}}</li>
