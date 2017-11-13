@@ -57,6 +57,7 @@ class PackageServiceProvider extends ServiceProvider {
         $this->app->register('Intervention\Image\ImageServiceProvider');
         $this->app->register('GrahamCampbell\Markdown\MarkdownServiceProvider');
 
+        AliasLoader::getInstance()->alias('Trans','Pinkwhale\Jellyfish\Models\Translations');
         AliasLoader::getInstance()->alias('Jelly','Pinkwhale\Jellyfish\Models\Content');
         AliasLoader::getInstance()->alias('JellyAuth','Pinkwhale\Jellyfish\Models\Users');
         AliasLoader::getInstance()->alias('Image','Intervention\Image\Facades\Image');
