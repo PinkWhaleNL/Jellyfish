@@ -35,9 +35,22 @@ By default jellyfish will recognize laravel's language. You can also force it to
 ```
 
 ### Query stuff from your modules.
+
 ```
 @foreach(Jelly::Module('articles')->get() as $article)
 	<li>{{var_dump($article->data(true))}}</li>
 @endforeach
+```
+
+### Authentications.
+
+You can check if a user has signed in by typing `JellyAuth::Check()` this functions returns `true/false`. You can also get all user's information by using the `User()` function like; `JellyAuth::User()`.
+
+**Example**
+```php
+JellyAuth::User()->id // Get unique ID
+JellyAuth::User()->name // Get name
+JellyAuth::User()->email // Get email
+and so one,,,
 ```
 
