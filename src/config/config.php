@@ -12,4 +12,7 @@
 
     'slug' => 'backend',
 
+    // Witch languages are supported by your website? (ISO standards)
+    'translation_languages' => ['nl','en','de'],
+
 ];
