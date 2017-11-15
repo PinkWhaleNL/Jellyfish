@@ -27,7 +27,6 @@ class Types extends Model
                 $rules[$field->name] = $field->validation;
             }
         }
-
         return $rules;
     }
 
