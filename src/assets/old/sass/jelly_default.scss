@@ -1,0 +1,19 @@
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600');
+@import "fontawesome/font-awesome";
+@import "node_modules/bootstrap-select/sass/bootstrap-select";
+
+$pink: #E20073;
+
+body{
+  padding:0px;
+  background:#f1f1f1;
+
+  .table > tbody > tr.middle > td {
+    vertical-align: middle;
+  }
+}
+
+@import "partials/navbar";
+@import "partials/toolbar";

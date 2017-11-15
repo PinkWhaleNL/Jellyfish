@@ -1,0 +1,40 @@
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600');
+
+$pink: #E20073;
+
+body{
+  background:#2E2D3C;
+  font-family: Rajdhani;
+
+  .wrapper{
+    margin-top:150px;
+    background:#fff;
+    .left{
+      padding:0px;
+      min-height:600px;
+      background:url('/media/bg_auth.jpg') 100% center;
+      background-position: left top;
+    }
+    .right{
+      h1{
+        font-size:50px;
+        font-weight:100;
+        color:$pink;
+      }
+      padding:30px;
+      form{
+        margin-top:40px;
+        input{
+          border-radius: 0px !important;
+          height:40px;
+        }
+        .btn.btn-primary{
+          background:#E20073;
+          border:0px;
+        }
+      }
+    }
+  }
+}

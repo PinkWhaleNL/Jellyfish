@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'Font Awesome 5 Solid';
+  font-style: normal;
+  font-weight: 900;
+  src: url(/fonts/fontawesome-pro-solid-900.eot?f27dfa82f0f2fbb9ad87367aca0bc0a7);
+  src: url(/fonts/fontawesome-pro-solid-900.eot?f27dfa82f0f2fbb9ad87367aca0bc0a7) format("embedded-opentype"), url(/fonts/fontawesome-pro-solid-900.woff2?a6914f244134ca6aad2a49bac6fefb33) format("woff2"), url(/fonts/fontawesome-pro-solid-900.woff?e89b9275eaf83becb889e8aa18ab3880) format("woff"), url(/fonts/fontawesome-pro-solid-900.ttf?fc55bb20b77b9c0c3d32da19ec5632c5) format("truetype"), url(/fonts/fontawesome-pro-solid-900.svg?cf35a4b0a2e9bcad251c0ffdbbea0931) format("svg");
+}
+
+.fa,
+.fas {
+  font-family: 'Font Awesome 5 Solid';
+  font-weight: 900;
+}
+

@@ -4,12 +4,15 @@
 @import "fontawesome/font-awesome";
 @import "node_modules/bootstrap-select/sass/bootstrap-select";
 
+
+// Optinal module packages.
+@import "datepicker/bootstrap-datetimepicker.min.css";
+
 $pink: #E20073;
 
 body{
   padding:0px;
   background:#f1f1f1;
-
   .table > tbody > tr.middle > td {
     vertical-align: middle;
   }
