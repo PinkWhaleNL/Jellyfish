@@ -81,13 +81,20 @@ class MediaController extends Controller {
         // Build Image.
         $img = Image::make($path);
 
+        if(isset(request()->fit) && count(explode('x',request()->fit)) > 1){
+            $sizes = explode('x',request()->fit);
+            $img->fit($sizes[0], $sizes[1], function ($constraint) {
+                $constraint->upsize();
+            });
+        }
+
         // Change size (canvas) when requested.
         if(isset(request()->size) && count(explode('x',request()->size)) > 1){
             $sizes = explode('x',request()->size);
             $img->resize($sizes[0], null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $img->resizeCanvas($sizes[0], $sizes[1], 'center');
+            $img->resizeCanvas($sizes[0], $sizes[1], 'center',false);
         }
 
         return $img->response();
