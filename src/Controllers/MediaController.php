@@ -100,6 +100,14 @@ class MediaController extends Controller {
         return $img->response();
     }
 
+    public function displayFile($id){
+        $file = (new Media)->where('id', $id)->where('type', 'attachment')->first();
+        if ( !Storage::exists('files/' . $file->filename) ) {
+          abort(404, 'File not found!');
+        }
+        return response()->download(storage_path('app/files/'.$file->filename));
+    }
+
     /**
      * @param $filename
      *

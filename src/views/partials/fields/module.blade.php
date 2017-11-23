@@ -7,11 +7,10 @@
 
 	<select name="{{$value->name??null}}" class="selectpicker form-control">
 		@foreach(Jelly::module($value->function->module)->get() as $item)
-			<option{{$db[$value->name] == $item->id ? ' selected' : null}} value="{{$item->id}}">{{$item->data()->{$value->function->field} }}</option>
+			<option {{isset($db[$value->name]) && $db[$value->name] == $item->id ? ' selected' : null}} value="{{$item->id}}"> {{$item->data()->{$value->function->field} }}</option>
 		@endforeach
 	</select>
 	{!! $errors->first($value->name, '<p class="help-block">:message</p>') !!}
-
 </div>
 
 

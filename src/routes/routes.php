@@ -3,7 +3,7 @@
 // Accessible by un-authenticated users.
 Route::get('/media/image/{id}','Pinkwhale\Jellyfish\Controllers\MediaController@displayCustomImage')->name('img');
 Route::get('/media/picture/{unique}', 'Pinkwhale\Jellyfish\Controllers\MediaController@displayPicture')->name('media-picture');
-Route::get('/media/file/{unique}', 'Pinkwhale\Jellyfish\Controllers\Admin\MediaController@displayFile')->name('media');
+Route::get('/media/file/{unique}', 'Pinkwhale\Jellyfish\Controllers\MediaController@displayFile')->name('media');
 
 // This group sets the namespace, prefix and the default laravel's web middleware.
 Route::group(['middleware'=>'web', 'namespace'=>'Pinkwhale\Jellyfish\Controllers','prefix'=>config('jf.slug')],function(){
