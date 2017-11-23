@@ -53,8 +53,13 @@ class MediaController extends Controller {
                 });
                 $path = 'pictures/' . $sKey . '_' . $file->filename;
                 Storage::put($path, (string) $img->encode());
-
             }
+
+            // Check if file below needed quality.
+            if(Image::make(request()->file)->width() < $this->sizes['big'][0] || Image::make(request()->file)->height() < $this->size['big'][1]){
+                $file->alert  = true;
+            }
+
         } else {
 
             $file->type = 'attachment';

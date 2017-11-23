@@ -29,6 +29,7 @@
 								<div class="col-md-8">
 									<input type="file" name="file" class="form-control" value=""/>
 									{!! $errors->first('file', '<p class="help-block">:message</p>') !!}
+									<small style="color:red;">Gebruik afbeeldingen groter dan 800x700px!</small>
 								</div>
 							</div>
 						@endif

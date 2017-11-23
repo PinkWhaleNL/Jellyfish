@@ -17,10 +17,10 @@
 			<div class="panel-heading">
 				Alle bestanden binnen dit platform.
 			</div>
-			<table class="table table-bordered table-striped table-condens2ed">
+			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-					 	<td align="center">Voorbeeld</td>
+					 	<td align="left">Voorbeeld</td>
 					 	<td>Titel</td>
 					 	<td>Laatst aangepast</td>
 						<td></td>
@@ -34,14 +34,22 @@
 					@endif
 					@foreach($list??[] as $item)
 					<tr class="middle">
-						<td align="center">
+						<td align="left">
 							@if($item->type == 'picture')
-							<img height="80" src="{{route('media-picture',['small_'.$item->filename])}}" alt="{{$item->title}}" title="{{$item->title}}"/>
+							<img height="80" src="{{route('img',[$item->id,'fit=90x70'])}}" alt="{{$item->title}}" title="{{$item->title}}"/>
 							@else
 							<img height="80" src="{{route('media-picture',['file_'.$item->filename])}}" alt="{{$item->title}}" title="{{$item->title}}"/>
 							@endif
 						</td>
-						<td>{{$item->title}}</td>
+						<td width="300">
+							{{$item->title}}
+							@if(isset($item->alert) && $item->alert == true)
+								<br>
+								<small style="float:left; color:orange; border-left:2px solid orange; padding-left:10px;">
+									Deze afbeelding heeft een kleine resolutie! Gebruik deze afbeelding alleen bij kleine toepassingen, niet als banners.
+								</small>
+							@endif
+						</td>
 						<td>{{$item->updated_at}}</td>
 						<td align="right">
 							<a href="#" class="btn btn-default btn-xs">Titel aanpassen</a>
