@@ -13,8 +13,14 @@ class Translations extends Model
      *
      * @return null
      */
-    public function language($lang){
-        return json_decode($this->data,true)[$lang] ?? null;
+    public function language($lang,$lorem){
+
+        if(isset(json_decode($this->data,true)[$lang])){
+            return json_decode($this->data,true)[$lang];
+        } elseif($lorem != null){
+            return $this->lorem($lorem);
+        }
+        return null;
     }
 
     /**
@@ -37,7 +43,7 @@ class Translations extends Model
         if($trans == null) return ($lorem == null ? ($lang . '.' . $string) : (new Translations)->lorem($lorem));
 
         // Return right String.
-        return $trans->language($lang);
+        return $trans->language($lang,$lorem);
     }
 
     /**
