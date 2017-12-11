@@ -9,15 +9,16 @@ class Translations extends Model
     protected $table = 'jelly_translations';
 
     /**
-     * @param $lang
+     * @param      $lang
+     * @param bool $lorem
      *
-     * @return null
+     * @return null|string
      */
-    public function language($lang,$lorem){
+    public function language($lang,$lorem=false){
 
         if(isset(json_decode($this->data,true)[$lang])){
             return json_decode($this->data,true)[$lang];
-        } elseif($lorem != null){
+        } elseif($lorem != null && $lorem != false){
             return $this->lorem($lorem);
         }
         return null;

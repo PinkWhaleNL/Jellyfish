@@ -71,7 +71,7 @@
 									{{csrf_field()}}
 								@foreach(config('jf.translation_languages')??['nl'] as $lItem)
 								<td style="border-top:0px !important">
-									<textarea rows="2" name="data[{{$lItem}}]" class="form-control input-sm">{{$row->language($lItem,null)}}</textarea>
+									<textarea rows="2" name="data[{{$lItem}}]" class="form-control input-sm">{{$row->language($lItem)}}</textarea>
 								</td>
 								@endforeach
 								<td align="right" style="border-top:0px !important">
