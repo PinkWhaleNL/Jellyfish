@@ -72,3 +72,4 @@ JellyAuth::User()->email // Get email
 
 ```
 
+   

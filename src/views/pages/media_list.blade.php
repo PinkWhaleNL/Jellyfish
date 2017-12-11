@@ -6,6 +6,20 @@
 
 @section('buttons')
 	<li><a class="btn btn-default btn-sm" href="{{route('jelly-media-show',['new'])}}"><i class="fa fa-upload fa-fw" aria-hidden="true"></i><span class="hidden-xs">Upload</span></a></li>
+
+	<li>|</li>
+
+	<li>
+		<div class="btn-group">
+			<a href="{{route('jelly-media')}}" class="btn btn-default btn-sm"><i class="fa fa-filter fa-fw" aria-hidden="true"></i></a>
+			<a class="btn btn-{{$filter == 'attachment' ? 'primary' : 'default' }} btn-sm" href="{{route('jelly-media-files')}}">
+				<span class="hidden-xs">Bestanden</span>
+			</a>
+			<a class="btn btn-{{$filter == 'picture' ? 'primary' : 'default' }} btn-sm" href="{{route('jelly-media-pictures')}}">
+				<span class="hidden-xs">Afbeeldingen</span>
+			</a>
+		</div>
+	</li>
 @endsection
 
 @section('content')

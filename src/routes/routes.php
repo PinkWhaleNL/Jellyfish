@@ -30,6 +30,8 @@ Route::group(['middleware'=>'web', 'namespace'=>'Pinkwhale\Jellyfish\Controllers
 
         // Media
         Route::get('media', 'MediaController@index')->name('jelly-media');
+        Route::get('media-files', 'MediaController@index_files')->name('jelly-media-files');
+        Route::get('media-pictures', 'MediaController@index_pictures')->name('jelly-media-pictures');
         Route::get('media/{id}', 'MediaController@show')->name('jelly-media-show');
         Route::post('media/{id}', 'MediaController@store');
         Route::post('media-remove/{id}', 'MediaController@destroy')->name('jelly-media-remove');

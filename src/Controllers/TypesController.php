@@ -40,8 +40,6 @@ class TypesController extends Controller {
 
     public function store($type, $id) {
 
-
-
         // Validate all input.
         Validator::make(request()->all(), (new Types)->GetValidationRules($type))->validate();
 

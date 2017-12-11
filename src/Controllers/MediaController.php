@@ -18,12 +18,19 @@ class MediaController extends Controller {
         'big'    => [800, 700],
     ];
 
-    public function index() {
-        $this->info['list'] = (new Media)->orderBy('updated_at', 'desc')->get();
+    public function index($type=null) {
+        $scope = (new Media)->orderBy('updated_at', 'desc');
+        if($type != null){
+            $scope = $scope->where('type',$type);
+        }
+        $this->info['list'] = $scope->get();
         $this->info['storage_size'] = $this->TotalStorage();
-
+        $this->info['filter'] = $type;
         return view('jf::pages.media_list', $this->info);
     }
+
+    public function index_files() { return $this->index('attachment'); }
+    public function index_pictures() { return $this->index('picture'); }
 
     public function show($id) {
 

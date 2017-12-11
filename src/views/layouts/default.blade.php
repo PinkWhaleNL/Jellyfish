@@ -31,6 +31,8 @@
 					<li{{in_array(request()->route()->getName(),['jelly-dashboard'])?' class=active':null}}><a href="{{route('jelly-dashboard')}}">Dashboard</a></li>
 					<li{{in_array(request()->route()->getName(),['jelly-translations','jelly-translation-create','jelly-translation'])?' class=active':null}}><a href="{{route('jelly-translations')}}">Vertalingen</a></li>
 					<li{{in_array(request()->route()->getName(),['jelly-media'])?' class=active':null}}><a href="{{route('jelly-media')}}">Media</a></li>
+
+
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Modules <span class="caret"></span></a>
 						<ul class="dropdown-menu">
