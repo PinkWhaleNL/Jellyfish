@@ -1,5 +1,9 @@
 @extends('jf::layouts.default')
 
+@section('toolbar')
+	<h1>Module: {{$data->type??null}}</h1>
+@endsection
+
 @section('content')
 	<style type="text/css" media="screen">
 		#editor {
@@ -8,7 +12,6 @@
 	</style>
 	<div class="container">
 		<div class="panel panel-default">
-			<div class="panel-heading"><b>Type:</b> {{$data->type??null}}</div>
 			<div class="panel-body">
 				<div class="col-xs-12 text-right">
 					<form action="" method="post">
@@ -16,6 +19,14 @@
 							<label>Title</label>
 							<input type="text" class="form-control" name="title" value="{{old('title')??($data->title??null)}}"/><br>
 						</div>
+						<div class="checkbox text-left">
+							<label>
+								<input type="checkbox"
+								       {{old('sortable') == true ? ' checked ' : (isset($data->sortable) && $data->sortable == true ? ' checked ' : null)}}
+								       name="sortable"
+								       value="true" /> Documenten moeten sorteerbaar zijn.
+							</label>
+						</div><br>
 						<div class="form-group text-left">
 							<label>Type (Unique)</label>
 							<input type="text" class="form-control" name="type" value="{{old('type')??($data->type??null)}}"/><br>

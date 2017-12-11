@@ -19,6 +19,7 @@
 				<thead>
 					<tr>
 						<td>ID</td>
+						<td>Sorteren</td>
 						<td>Type</td>
 						<td>Titel</td>
 						<td align="center">Regels in DB</td>
@@ -29,6 +30,7 @@
 					@foreach($types as $type)
 					<tr>
 						<td>{{$type->id}}</td>
+						<td>{{$type->sortable == true ? 'Ja' : 'Nee'}}</td>
 						<td>{{$type->type}}</td>
 						<td>{{$type->title}}</td>
 						<td align="center">{{$type->rows()}}</td>

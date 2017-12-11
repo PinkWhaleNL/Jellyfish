@@ -52,6 +52,7 @@ class AdminController extends Controller
         }
 
         $type = ($id != 'new'?(new Types)->where('id',$id)->firstOrFail():(new Types));
+        $type->sortable = (request()->sortable === 'true'? true: false);
         $type->type = str_slug(request()->type);
         $type->title = request()->title;
         $type->data = request()->json;

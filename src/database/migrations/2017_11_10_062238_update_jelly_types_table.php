@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJellyTypesTable extends Migration
+class UpdateJellyTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,9 @@ class CreateJellyTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('jelly_types', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::table('jelly_types', function (Blueprint $table) {
             $table->integer('sortable')->default(0);
-            $table->string('type');
-            $table->string('title');
-            $table->json('data');
-            $table->timestamps();
         });
-
     }
 
     /**
@@ -31,6 +25,6 @@ class CreateJellyTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jelly_types');
+
     }
 }

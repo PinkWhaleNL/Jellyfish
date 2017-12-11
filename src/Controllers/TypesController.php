@@ -27,8 +27,11 @@ class TypesController extends Controller {
     public function show($type, $id) {
         $this->info['data'] = (new Types)->where('type', $type)->first();
         $this->info['db'] = null;
+        $this->info['row'] = null;
+
         if ( $id != 'new' ) {
             $content = (new Content)->where('type', $type)->where('id', $id)->firstOrFail();
+            $this->info['row'] = $content;
             $this->info['db'] = (array) $content->json();
         }
 
@@ -37,6 +40,8 @@ class TypesController extends Controller {
 
     public function store($type, $id) {
 
+
+
         // Validate all input.
         Validator::make(request()->all(), (new Types)->GetValidationRules($type))->validate();
 
@@ -44,6 +49,11 @@ class TypesController extends Controller {
         unset($fields['_token']);
 
         $content = ($id != 'new' ? (new Content)->where('type', $type)->where('id', $id)->firstOrFail() : (new Content));
+
+        if(request()->sort){
+            $content->sort = (int)request()->sort;
+        }
+
         $content->type = $type;
         $content->data = json_encode($fields);
         $content->save();
