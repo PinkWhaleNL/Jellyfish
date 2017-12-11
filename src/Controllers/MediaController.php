@@ -56,7 +56,7 @@ class MediaController extends Controller {
             }
 
             // Check if file below needed quality.
-            if(Image::make(request()->file)->width() < $this->sizes['big'][0] || Image::make(request()->file)->height() < $this->size['big'][1]){
+            if(Image::make(request()->file)->width() < $this->sizes['big'][0] || Image::make(request()->file)->height() < $this->sizes['big'][1]){
                 $file->alert  = true;
             }
 
