@@ -1,6 +1,6 @@
-
 # JellyFish - Easy CMS system.
 
+<<<<<<< HEAD
 1. First install `composer require pinkwhalenl/jellyfish`.
 2. Be sure your `.env` file is configured (DB).
 3. Run the net migrations `php artisan migrate`.
@@ -73,3 +73,6 @@ JellyAuth::User()->email // Get email
 ```
 
    
+=======
+All documentation can be found inside this project's [Wiki page](https://github.com/PinkWhaleNL/Jellyfish/wiki).
+>>>>>>> 94809ba1e84900709e50c0ca606817bb68327152
