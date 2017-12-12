@@ -15,7 +15,7 @@
 					Rangschikken
 				</div>
 				<div class="panel-body">
-					<input type="number" class="form-control" name="sort" value="{{old('sort')??$row->sort}}"/>
+					<input type="number" class="form-control" name="sort" value="{{old('sort')??($row->sort??null)}}"/>
 					<small style="color:#919191;">
 						Je kunt documenten sorteren, dit zal op de website in volgorde worden getoond.
 					</small>
