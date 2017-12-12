@@ -15,7 +15,6 @@ class CreateJellyTypesTable extends Migration
     {
         Schema::create('jelly_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sortable')->default(0);
             $table->string('type');
             $table->string('title');
             $table->json('data');
