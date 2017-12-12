@@ -9,19 +9,31 @@
 	{{csrf_field()}}
 	<div class="container">
 		<div class="col-md-8 col-md-offset-2">
-			@if($data->sortable == true)
+
+
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					Rangschikken
+					Standaard opties
 				</div>
 				<div class="panel-body">
+					@if($data->sortable == true)
+					<b>Rankschikken</b>
 					<input type="number" class="form-control" name="sort" value="{{old('sort')??($row->sort??null)}}"/>
 					<small style="color:#919191;">
 						Je kunt documenten sorteren, dit zal op de website in volgorde worden getoond.
 					</small>
+					@endif
+					@if($data->publish_date == true)
+					{!! $data->sortable == true ? '<br><br>' : null !!}
+					<b>(Publicatie) Datum</b>
+					<input type="text" class="form-control datepicker" name="published_at" value="{{old('published_at')??($row->published_at??null)}}"/>
+					<small style="color:#919191;">
+						Dit document kan gesorteerd worden op datum en/of zal worden vertoond met een (publicatie) datum.
+					</small>
+					@endif
 				</div>
 			</div>
-			@endif
+
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Document

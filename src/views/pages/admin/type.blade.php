@@ -26,6 +26,14 @@
 								       name="sortable"
 								       value="true" /> Documenten moeten sorteerbaar zijn.
 							</label>
+						</div>
+						<div class="checkbox text-left">
+							<label>
+								<input type="checkbox"
+								       {{old('publish_date') == true ? ' checked ' : (isset($data->publish_date) && $data->publish_date == true ? ' checked ' : null)}}
+								       name="publish_date"
+								       value="true" /> Documenten beschikken over een publicatie datum.
+							</label>
 						</div><br>
 						<div class="form-group text-left">
 							<label>Type (Unique)</label>

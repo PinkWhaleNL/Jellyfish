@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Pinkwhale\Jellyfish\Models\Content;
 use Pinkwhale\Jellyfish\Models\Types;
 use Validator;
+use Carbon;
 
 class TypesController extends Controller {
 
@@ -48,9 +49,8 @@ class TypesController extends Controller {
 
         $content = ($id != 'new' ? (new Content)->where('type', $type)->where('id', $id)->firstOrFail() : (new Content));
 
-        if(request()->sort){
-            $content->sort = (int)request()->sort;
-        }
+        if(request()->sort){ $content->sort = (int)request()->sort; }
+        if(request()->published_at){ $content->published_at = Carbon::parse(request()->published_at); }
 
         $content->type = $type;
         $content->data = json_encode($fields);
