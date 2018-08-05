@@ -15,8 +15,10 @@ class CreateJellyContentTable extends Migration
     {
         Schema::create('jelly_content', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('sort')->default(0);
             $table->string('type');
             $table->json('data');
+            $table->timestamp('published_at')->useCurrent();
             $table->timestamps();
         });
     }

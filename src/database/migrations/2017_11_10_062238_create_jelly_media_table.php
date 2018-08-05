@@ -15,6 +15,7 @@ class CreateJellyMediaTable extends Migration
     {
         Schema::create('jelly_media', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('alert')->default(0);
             $table->string('type')->default('picture');
             $table->string('title');
             $table->string('filename');
