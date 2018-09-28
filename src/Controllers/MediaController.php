@@ -124,7 +124,7 @@ class MediaController extends Controller {
         }
 
         // Return also with slugified title + extension.
-        return response()->download(storage_path('app/files/'.$file->filename),str_slug($file->title).'.'.explode('.',$file->filename)[1]);
+        return response()->download(storage_path('app/files/'.$file->filename),$file->title.'.'.explode('.',$file->filename)[1]);
     }
 
     /**
