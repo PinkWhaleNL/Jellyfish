@@ -18,7 +18,7 @@ class CreateJellyTypesTable extends Migration
             $table->integer('sortable')->default(0);
             $table->string('type');
             $table->string('title');
-            $table->json('data');
+            $table->longText('data');
             $table->integer('publish_date')->default(0);
             $table->timestamps();
         });
