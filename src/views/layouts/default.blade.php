@@ -82,5 +82,7 @@
 	<footer class="col-xs-12 text-center" style="color:#666; font-size:11px;"><br>
 		<a href="{{url(config('jf.footer_url'))}}" style="color:#919191" target="_blank"><small>{{config('jf.footer_company')}}</small></a>
 	</footer>
+
+	@yield('js')
 </body>
 </html>
