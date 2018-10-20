@@ -116,37 +116,6 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
      "function": ["attachment"]
 }
 ```
-#### Button
-```JSON
-{
-    "title":"Button",
-    "placeholder":"...",
-    "type":"text",
-    "name":"button"
-}
-```
-#### Video
-```JSON
-{
-    "title":"Video",
-    "placeholder":"Youtube URL, for instance:  https://www.youtube.com/embed/ljMy9C5dEfE",
-    "type":"text",
-    "name":"video"
-  }
-```
-#### Dates
-You can also use as name `published_at` then it will be stored directly inside the `published_at` column instead of inside the data json column.
-```JSON
-{
-     "title":"Publicatiedatum",
-     "placeholder":"eg. 2022-12-31",
-     "type":"date",
-     "name":"date",
-     "required":true,
-     "function": {"format":"yyyy-mm-dd"},
-     "validation":"required"
-}       
-```
 
 # Front-end Integration
 When you'll store a document eg. based on the selected `module`. All content will be stored inside the `data` column. This column is filled with the module's JSON values. 
