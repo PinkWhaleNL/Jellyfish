@@ -61,7 +61,7 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
     "placeholder":"eg. This is a title",
     "type":"text",
     "name":"title",
-    "slug":true of false
+    "slug":true,
     "validation":"required"
 }
 ```
@@ -69,7 +69,7 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
 ```JSON
 {
     "title":"Content",
-    "placeholder":"eg. This is a title",
+    "placeholder":"...",
     "type":"markdown",
     "name":"content",
     "required":true,
@@ -80,7 +80,7 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
 ```JSON
 {
      "title":"Image",
-     "placeholder":"eg. This is a title",
+     "placeholder":"...",
      "type":"media",
      "name":"picture",
      "required":true,
@@ -91,7 +91,7 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
 ```JSON
 {
      "title":"attachment",
-     "placeholder":"eg. This is a title",
+     "placeholder":"...",
      "type":"media",
      "name":"pdf",
      "required":false,
@@ -102,7 +102,7 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
 ```JSON
 {
     "title":"Button",
-    "placeholder":"eg. Text button",
+    "placeholder":"...",
     "type":"text",
     "name":"button"
 }
