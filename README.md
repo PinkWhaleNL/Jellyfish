@@ -4,7 +4,7 @@ Most easy and dynamic Laravel CMS with build-in Language, User & media managemen
 **Overview:**   
 [Requirements](#requirements)  
 [Installation](#installation)    
-[Modules](#modules)  
+[Dynamic Content](#dynamic-content)  
 
 # Requirements
 
@@ -26,21 +26,15 @@ Most easy and dynamic Laravel CMS with build-in Language, User & media managemen
 5. Go to `https://{YOURDOMAIN}}.com/backend`.
 6. Sign-in with the default credentials; `info@pinkwhale.io` & `secret`.
 
-# Modules
+# Dynamic content
+Modules are like MySQL database tables, you'll define columns inside `modules` to structure you data and grouping them. On the Admin side of this platform you can add `fields` into you JSON file, and by telling each field what to do you'll get a customer friendly form. When you finished you're `module` you can start adding some documents from the navigation bar.
 
-Modules like database tables, you'll define columns where  later on you can put data inside the database based on te d . In fact `modules` will collect all fields, put them into one single JSON string and put this string inside the table `jelly_content`, all based on the defines structure from the `module`.
-
-[Set-up a Module](#module-backend)    
-[Use a Module](#module-front-end)  
-
-
-
-
-## Adding Fields to your module.
-
-
-You can pick a various types. 
-**Example**
+### Set-up your first Module
+1. Click on the right top side on your username. 
+2. Click on `admin - Modules`. 
+3. Click on `Create new Module`.
+4. Add an `title` and also check some options who are needed in your case.
+5. Start clean and add the following code.
 ```
 {
     "fields":
@@ -49,12 +43,14 @@ You can pick a various types.
         ]
 }
 ```
+6. Fill the fields parts with the fields below.
 
-## All fields
+
+### All fields
 
 In each field you can still manage your validation rules brought from Laravel with the key `validation`. Also their are some functions to specify how the data will be stored inside your DB.
 
-## Options
+#### Options
 * `required` - true/false. HTML5 based validation. Also a red dot.
 * `placeholder` - (When possible) - Places a html5 placeholder above the empty fields.
 * `name` - Needed as column key. Will be filled in as name inside a form field.
