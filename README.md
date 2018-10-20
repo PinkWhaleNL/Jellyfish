@@ -32,7 +32,7 @@ Most easy and dynamic Laravel CMS with build-in Language, User & media managemen
 # Dynamic content
 Modules are like MySQL database tables, you'll define columns inside `modules` to structure you data and grouping them. On the Admin side of this platform you can add `fields` into you JSON file, and by telling each field what to do you'll get a customer friendly form. When you finished you're `module` you can start adding some documents from the navigation bar.
 
-### Set-up your first Module
+### Set-up an Module
 1. Click on the right top side on your username. 
 2. Click on `admin - Modules`. 
 3. Click on `Create new Module`.
@@ -42,27 +42,18 @@ Modules are like MySQL database tables, you'll define columns inside `modules` t
 {
     "fields":
         [
-          ...
+          
         ]
 }
 ```
 6. Fill the fields parts with the fields below.
 
 
-### All fields
+### Available fields
 
-In each field you can still manage your validation rules brought from Laravel with the key `validation`. Also their are some functions to specify how the data will be stored inside your DB.
+In each field you can still manage your validation rules brought from Laravel with the key `validation`. Also their are some functions to specify how the data will be stored inside your DB. Also has each `field` his own Options. So please check the documentation below.
 
-#### Options
-* `required` - true/false. HTML5 based validation. Also a red dot.
-* `placeholder` - (When possible) - Places a html5 placeholder above the empty fields.
-* `name` - Needed as column key. Will be filled in as name inside a form field.
-* `type` - Marks the type of form element that will be used. Also partial for UI data will be this type-name. 
-* `validation` - String with validation rules (laravel based).
-
-***
-
-### Text field.
+#### Text field.
 When you'll using a text field for title purposes, you can als add `"slug":true`. The system will automatically add the field `{name}_slug`. Note; you cannot change this afterwards when a document is already saved!
 ```JSON
 {
@@ -70,7 +61,7 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
     "placeholder":"eg. This is a title",
     "type":"text",
     "name":"title",
-    "required":true,
+    "slug":true of false
     "validation":"required"
 }
 ```
