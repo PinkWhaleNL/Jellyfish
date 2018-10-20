@@ -3,37 +3,34 @@ Most easy and dynamic Laravel CMS with build-in Language, User & media managemen
 
 **Overview:**   
 [Requirements](#requirements)  
-[Installation](#installation)    
+[Installation](#installation)
+[Upgrade guide](#upgrade-guide)
 [Dynamic Content](#dynamic-content)  
+-> [Database understanding](#database-understanding)  
 -> [Add Module](#set-up-your-first-module)    
 -> [Available fields](#available-fields) 
 
 
 # Requirements
-
 - Laravel 5.7.* (or higher)
 - PHP 7.1 (or higher)
 - Pre-configured DB (Supporting JSON columns)
 
 # Upgrade guide
-
 *No `data()` needed anymore* to get your field data from a document. Now you can do `$result->data->title`. Also you can query inside the `data` column of the `jelly_content` table. Please update your code, in the next versions `data()` function will be removed.
 
-## Packages
-```
-"graham-campbell/markdown": "^10.0",
-"intervention/image": "^2.4"
-```
-
-## Installation
-1. First install `composer require pinkwhalenl/jellyfish`.
+# Installation
+1. Run `composer require pinkwhalenl/jellyfish`.
 2. Be sure your `.env` file is configured (DB).
 3. Publish the config, css,js & font files `php artisan vendor:publish`.
 4. Run the new migrations `php artisan migrate`.
 5. Go to `https://{YOURDOMAIN}}.com/backend`.
 6. Sign-in with the default credentials; `info@pinkwhale.io` & `secret`.
 
-# Database understanding.
+# Dynamic content
+Modules are like MySQL database tables, you'll define columns inside `modules` to structure you data and grouping them. On the Admin side of this platform you can add `fields` into you JSON file, and by telling each field what to do you'll get a customer friendly form. When you finished you're `module` you can start adding some documents from the navigation bar.
+
+### Database understanding.
 Inside the `jelly_types` table, will stored all `module` information like the fields.
 ```
 id (unique) | sort(int) | type (module name) | title | data (all fields) | publish_date
@@ -44,9 +41,6 @@ Inside the `jelly_content` table, all document/pages are stored. Referenced with
 ```
 id (unique) | sort(int) | type (module name) | data (json as longText) | published_at | created_at | updated_at
 ```
-
-# Dynamic content
-Modules are like MySQL database tables, you'll define columns inside `modules` to structure you data and grouping them. On the Admin side of this platform you can add `fields` into you JSON file, and by telling each field what to do you'll get a customer friendly form. When you finished you're `module` you can start adding some documents from the navigation bar.
 
 ### Set-up an Module
 1. Click on the right top side on your username. 
