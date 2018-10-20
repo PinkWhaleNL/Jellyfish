@@ -15,6 +15,10 @@ Most easy and dynamic Laravel CMS with build-in Language, User & media managemen
 - PHP 7.1 (or higher)
 - Pre-configured DB (Supporting JSON columns)
 
+# Upgrade guide
+
+*No `data()` needed anymore* to get your field data from a document. Now you can do `$result->data->title`. Also you can query inside the `data` column of the `jelly_content` table. Please update your code, in the next versions `data()` function will be removed.
+
 ## Packages
 ```
 "graham-campbell/markdown": "^10.0",
