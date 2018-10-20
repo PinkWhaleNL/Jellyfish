@@ -2,8 +2,9 @@
 Most easy and dynamic Laravel CMS with build-in Language, User & media management. With `modules` you can build your own backend page witf pre-configured fields like eg. `text`, `textarea`, `select` etc. All fields will be stored inside a JSON column of the `jelly_types` table. Each page will be stored inside `jelly_content` table. On the front-end you can query them by using the `Jelly` static class like; `Jelly::Module('categories')->get()`.   
 
 **Overview:**   
-[1. Requirements](#requirements)  
-[2. Installation](#installation)  
+[Requirements](#requirements)  
+[Installation](#installation)    
+[Modules](#modules)  
 
 # Requirements
 
@@ -17,7 +18,7 @@ Most easy and dynamic Laravel CMS with build-in Language, User & media managemen
 "intervention/image": "^2.4"
 ```
 
-# Installation
+## Installation
 1. First install `composer require pinkwhalenl/jellyfish`.
 2. Be sure your `.env` file is configured (DB).
 3. Publish the config, css,js & font files `php artisan vendor:publish`.
@@ -27,13 +28,13 @@ Most easy and dynamic Laravel CMS with build-in Language, User & media managemen
 
 # Modules
 
-## Default parameters. (build in)
-you can check two checkboxes. `sort` & `published_at` those two are separated from the JSON data and have their own column inside **`DB -> jelly_content`**
+Modules like database tables, you'll define columns where  later on you can put data inside the database based on te d . In fact `modules` will collect all fields, put them into one single JSON string and put this string inside the table `jelly_content`, all based on the defines structure from the `module`.
 
-```php
-// Example with published_date.
-Jelly::Module('example')->orderBy('published_at','desc')->get();
-```
+[Set-up a Module](#module-backend)    
+[Use a Module](#module-front-end)  
+
+
+
 
 ## Adding Fields to your module.
 
@@ -139,7 +140,13 @@ You can also use as name `published_at` then it will be stored directly inside t
 }       
 ```
 
+## Default parameters. (build in)
+you can check two checkboxes. `sort` & `published_at` those two are separated from the JSON data and have their own column inside **`DB -> jelly_content`**
 
+```php
+// Example with published_date.
+Jelly::Module('example')->orderBy('published_at','desc')->get();
+```
 
 
 # Front-end Integration
