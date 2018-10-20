@@ -48,6 +48,12 @@ Modules are like MySQL database tables, you'll define columns inside `modules` t
 ```
 6. Fill the fields parts with the fields below.
 
+**[Note] Default checkboxes while adding modules**   
+you can check two checkboxes. `sort` & `published_at` those two are separated from the JSON data and have their own column inside the `jelly_content` table. You can also query them by the standard eloquent way.
+```php
+// Example with published_date.
+Jelly::Module('example')->orderBy('published_at','desc')->get();
+```
 
 ### Available fields
 
@@ -65,7 +71,7 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
     "validation":"required"
 }
 ```
-### Markdown text.
+#### Markdown text.
 ```JSON
 {
     "title":"Content",
@@ -76,7 +82,7 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
     "validation":"required"
 }
 ```
-### Media
+#### Media
 ```JSON
 {
      "title":"Image",
@@ -87,7 +93,7 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
      "validation":"required"
 }
 ```
-### Attachment
+#### Attachment
 ```JSON
 {
      "title":"attachment",
@@ -98,7 +104,7 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
      "function": ["attachment"]
 }
 ```
-### Button
+#### Button
 ```JSON
 {
     "title":"Button",
@@ -107,7 +113,7 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
     "name":"button"
 }
 ```
-### Video
+#### Video
 ```JSON
 {
     "title":"Video",
@@ -116,7 +122,7 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
     "name":"video"
   }
 ```
-### Dates
+#### Dates
 You can also use as name `published_at` then it will be stored directly inside the `published_at` column instead of inside the data json column.
 ```JSON
 {
@@ -130,42 +136,28 @@ You can also use as name `published_at` then it will be stored directly inside t
 }       
 ```
 
-## Default parameters. (build in)
-you can check two checkboxes. `sort` & `published_at` those two are separated from the JSON data and have their own column inside **`DB -> jelly_content`**
-
-```php
-// Example with published_date.
-Jelly::Module('example')->orderBy('published_at','desc')->get();
-```
-
-
 # Front-end Integration
 
-### Translations   
-By default jellyfish will recognize laravel's running language. You can also force it to another language.
-
+#### Query stuff from your modules.
+It's just Laravel, we did only the first few steps. So use the static function `Jelly::Module('MODULENAME')->{Query}`. On the background we take the `Content` model and query by type `->where('type','MODALNAME')`. 
 ```php
-{{Trans::get('home.title')}} // Most basic.
-{{Trans::get('home.title','nl')}} // With language.
-{{Trans::get('home.title','nl','lorem:10')}} // With language + Lorem Ipsum.
-{{Trans::get('home.title',null,'lorem:10')}} // No language.
-```
-
-### Query stuff from your modules.
-
-```
+// example 1.
 @foreach(Jelly::Module('articles')->get() as $article)
 	<li>{{var_dump($article->data(true))}}</li>
 @endforeach
-```
-### Images
 
+// example 2.
+$content = Jelly::Module('articles')->where('data->slug',$slug)->firstOrFail();
+```
+#### Images
+Jellyfish supports a wide range of supporting images and image-caching.
 ```html
-<img width="100" src="{{route('img',[$item->data()->picture,'size=100x100'])}}"/>
+<!-- Where 'picture' is field's name.) -->
+<img src="{{route('img',[$item->picture,'size=100x100'])}}"/>
 ```
 
 ### Using Markdown field
-When using the markdown field add a convert to HTML to use all the options like Boldtext, Italic and Heading.
+When using the markdown field add the `Markdown::convertToHtml()` function to convert markdown into HTML format.
 ```html
 {!! Markdown::convertToHtml($data->data()->content) !!}
 ```
@@ -194,24 +186,23 @@ JellyAuth::User()->name // Get name
 JellyAuth::User()->email // Get email
 
 ```
-### Show content by Date (last x amount made)
 
-You can show the last x amount of records that ware made by using the Dates module
+# Translations   
+By default jellyfish will recognize laravel's running language. You can also force it to another language.
 
-**For example:**
 ```php
-@foreach(Jelly::Module('blog')->orderBy('id','desc')->limit(3)->get() as $article)
-  {{Carbon::parse($article->data()->created_at)->format('d-m-Y')}}
-  <a href="/article/{{$article->data()->id}}">{{$article->data()->title}}</a>
-@endforeach
-
+{{Trans::get('home.title')}} // Most basic.
+{{Trans::get('home.title','nl')}} // With language.
+{{Trans::get('home.title','nl','lorem:10')}} // With language + Lorem Ipsum.
+{{Trans::get('home.title',null,'lorem:10')}} // No language.
 ```
 
-# Development
+
+# On development environments
 
 When you want to change this package from the `vendor` folder. `composer require pinkwhalenl/jellyfish dev-master --prefer-source`
 
-## Webpack
+#### Webpack
 
 For compiling assets. Move the Sass, JS & fonts folder into your `resources/assets` folder structure.
 
