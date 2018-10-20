@@ -1,28 +1,17 @@
 # JellyFish
-Most easy and dynamic Laravel CMS with build-in Language, User & media management. All `modules` need to be cofigured.
-
-
+Most easy and dynamic Laravel CMS with build-in Language, User & media management. With `modules` you can build your own backend page witf pre-configured fields like eg. `text`, `textarea`, `select` etc. All fields will be stored inside a JSON column of the `jelly_types` table. Each page will be stored inside `jelly_content` table. On the front-end you can query them by using the `Jelly` static class like; `Jelly::Module('categories')->get()`.   
 
 **Overview:**   
-[1. Installation](#installing-website)     
-[2. Sitemap Generator](#sitemap-generator)    
-[3. Template Information](#template-information)  
-[4. Blade Structure](#blade-structure)  
-[5. Available blade sections](#available-sections)  
-[6. Customize styling](#customize-styling)  
-[7. Cookie Modal](#cookie-modal)    
-[8. Countdown Settings](#countdown)
-[9. Singing up form](#signup)
+[1. Installation](#installation)  
 
 
-# Install package
+# Installation
 1. First install `composer require pinkwhalenl/jellyfish`.
-2. When you want to change this package from the `vendor` folder. `composer require pinkwhalenl/jellyfish dev-master --prefer-source`
-3. Be sure your `.env` file is configured (DB).
-4. Run the net migrations `php artisan migrate`.
-5. Publish all css,js and font files. `php artisan vendor:publish`  Choose the pinkwhale package to be published.
-6. Go to `https://{YOURDOMAIN}}.com/backend`. Also will be `backend` the default url. You can change it inside je Jellyfish config file.
-7. Sign-in as `info@pinkwhale.io` with the password `secret`.
+2. Be sure your `.env` file is configured (DB).
+3. Publish the config, css,js & font files `php artisan vendor:publish`.
+4. Run the new migrations `php artisan migrate`.
+5. Go to `https://{YOURDOMAIN}}.com/backend`.
+6. Sign-in with the default credentials; `info@pinkwhale.io` & `secret`.
 
 # Modules
 
@@ -210,6 +199,8 @@ You can show the last x amount of records that ware made by using the Dates modu
 ```
 
 # Development
+
+When you want to change this package from the `vendor` folder. `composer require pinkwhalenl/jellyfish dev-master --prefer-source`
 
 ## Webpack
 
