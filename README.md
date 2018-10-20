@@ -13,7 +13,7 @@ Most easy and dynamic Laravel CMS with build-in Language, User & media managemen
 
 - Laravel 5.7.* (or higher)
 - PHP 7.1 (or higher)
-- Pre-configured DB (with no other Jellyfish installation inside)
+- Pre-configured DB (Supporting JSON columns)
 
 ## Packages
 ```
