@@ -17,7 +17,7 @@ class CreateJellyContentTable extends Migration
             $table->increments('id');
             $table->integer('sort')->default(0);
             $table->string('type');
-            $table->json('data');
+            $table->longText('data');
             $table->timestamp('published_at')->useCurrent();
             $table->timestamps();
         });

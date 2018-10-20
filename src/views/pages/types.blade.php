@@ -24,7 +24,7 @@
 						@if($data->sortable == true)
 						<td>Rangschikking</td>
 						@endif
-						@foreach(array_slice($data->json()->fields,0,3) as $item)
+						@foreach(array_slice($data->data->fields,0,3) as $item)
 					 	<td>{{$item->title}}</td>
 						@endforeach
 						<td align="right" width="150">Laatste update</td>
@@ -34,14 +34,15 @@
 				<tbody>
 					@foreach($documents as $doc)
 						<tr>
+						
 							<td>{{$doc->id}}</td>
 							@if($data->sortable == true)
 								<td align="center">{{$doc->sort}}</td>
 							@endif
-							@foreach(array_slice($data->json()->fields,0,3) as $item)
+							@foreach(array_slice($data->data->fields,0,3) as $item)
 								@php
 									$name = $item->name;
-									$content = (array)$doc->json();
+									$content = (array)$doc->data;
 								@endphp
 
 								@if($item->type == 'markdown')

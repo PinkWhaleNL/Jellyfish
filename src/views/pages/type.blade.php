@@ -39,7 +39,7 @@
 					Document
 				</div>
 				<div class="panel-body">
-					@foreach($data->json()->fields as $key=>$value)
+					@foreach($data->data->fields as $key=>$value)
 						@include('jf::partials.fields.'.$value->type)
 					@endforeach
 					<input type="submit" value="Save!"/>

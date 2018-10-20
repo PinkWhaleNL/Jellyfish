@@ -12,5 +12,3 @@
 	</select>
 	{!! $errors->first($value->name, '<p class="help-block">:message</p>') !!}
 </div>
-
-

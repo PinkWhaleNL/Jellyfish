@@ -22,7 +22,6 @@ class CreateJellyTypesTable extends Migration
             $table->integer('publish_date')->default(0);
             $table->timestamps();
         });
-
     }
 
     /**
