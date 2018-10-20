@@ -1,67 +1,77 @@
 # JellyFish
-Most easy and dynamic Laravel CMS with build-in Language, User & media management. All `modules` need to be cofigured.
-
-
+Most easy and dynamic Laravel CMS with build-in Language, User & media management. With `modules` you can build your own backend page witf pre-configured fields like eg. `text`, `textarea`, `select` etc. All fields will be stored inside a JSON column of the `jelly_types` table. Each page will be stored inside `jelly_content` table. On the front-end you can query them by using the `Jelly` static class like; `Jelly::Module('categories')->get()`.   
 
 **Overview:**   
-[1. Installation](#installing-website)     
-[2. Sitemap Generator](#sitemap-generator)    
-[3. Template Information](#template-information)  
-[4. Blade Structure](#blade-structure)  
-[5. Available blade sections](#available-sections)  
-[6. Customize styling](#customize-styling)  
-[7. Cookie Modal](#cookie-modal)    
-[8. Countdown Settings](#countdown)
-[9. Singing up form](#signup)
+[Requirements](#requirements)  
+[Installation](#installation)    
+[Dynamic Content](#dynamic-content)  
+-> [Add Module](#set-up-your-first-module)    
+-> [Available fields](#available-fields) 
 
 
-# Install package
+# Requirements
+
+- Laravel 5.7.* (or higher)
+- PHP 7.1 (or higher)
+- Pre-configured DB (Supporting JSON columns)
+
+## Packages
+```
+"graham-campbell/markdown": "^10.0",
+"intervention/image": "^2.4"
+```
+
+## Installation
 1. First install `composer require pinkwhalenl/jellyfish`.
-2. When you want to change this package from the `vendor` folder. `composer require pinkwhalenl/jellyfish dev-master --prefer-source`
-3. Be sure your `.env` file is configured (DB).
-4. Run the net migrations `php artisan migrate`.
-5. Publish all css,js and font files. `php artisan vendor:publish`  Choose the pinkwhale package to be published.
-6. Go to `https://{YOURDOMAIN}}.com/backend`. Also will be `backend` the default url. You can change it inside je Jellyfish config file.
-7. Sign-in as `info@pinkwhale.io` with the password `secret`.
+2. Be sure your `.env` file is configured (DB).
+3. Publish the config, css,js & font files `php artisan vendor:publish`.
+4. Run the new migrations `php artisan migrate`.
+5. Go to `https://{YOURDOMAIN}}.com/backend`.
+6. Sign-in with the default credentials; `info@pinkwhale.io` & `secret`.
 
-# Modules
+# Database understanding.
+Inside the `jelly_types` table, will stored all `module` information like the fields.
+```
+id (unique) | sort(int) | type (module name) | title | data (all fields) | publish_date
+```
 
-## Default parameters. (build in)
-you can check two checkboxes. `sort` & `published_at` those two are separated from the JSON data and have their own column inside **`DB -> jelly_content`**
+Inside the `jelly_content` table, all document/pages are stored. Referenced with `type` to an `module`.  
+**Table: `jelly_content`**
+```
+id (unique) | sort(int) | type (module name) | data (json as longText) | published_at | created_at | updated_at
+```
 
+# Dynamic content
+Modules are like MySQL database tables, you'll define columns inside `modules` to structure you data and grouping them. On the Admin side of this platform you can add `fields` into you JSON file, and by telling each field what to do you'll get a customer friendly form. When you finished you're `module` you can start adding some documents from the navigation bar.
+
+### Set-up an Module
+1. Click on the right top side on your username. 
+2. Click on `admin - Modules`. 
+3. Click on `Create new Module`.
+4. Add an `title` and also check some options who are needed in your case.
+5. Start clean and add the following code.
+```
+{
+    "fields":
+        [
+          
+        ]
+}
+```
+6. Fill the fields parts with the fields below.
+
+**[Note] Default checkboxes while adding modules**   
+you can check two checkboxes. `sort` & `published_at` those two are separated from the JSON data and have their own column inside the `jelly_content` table. You can also query them by the standard eloquent way.
 ```php
 // Example with published_date.
 Jelly::Module('example')->orderBy('published_at','desc')->get();
 ```
 
-## Adding Fields to your module.
+### Available fields
 
+In each field you can still manage your validation rules brought from Laravel with the key `validation`. Also their are some functions to specify how the data will be stored inside your DB. Also has each `field` his own Options. So please check the documentation below.
 
-You can pick a various types. 
-**Example**
-```
-{
-    "fields":
-        [
-          ...
-        ]
-}
-```
-
-## All fields
-
-In each field you can still manage your validation rules brought from Laravel with the key `validation`. Also their are some functions to specify how the data will be stored inside your DB.
-
-## Options
-* `required` - true/false. HTML5 based validation. Also a red dot.
-* `placeholder` - (When possible) - Places a html5 placeholder above the empty fields.
-* `name` - Needed as column key. Will be filled in as name inside a form field.
-* `type` - Marks the type of form element that will be used. Also partial for UI data will be this type-name. 
-* `validation` - String with validation rules (laravel based).
-
-***
-
-### Text field.
+#### Text field.
 When you'll using a text field for title purposes, you can als add `"slug":true`. The system will automatically add the field `{name}_slug`. Note; you cannot change this afterwards when a document is already saved!
 ```JSON
 {
@@ -69,105 +79,72 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
     "placeholder":"eg. This is a title",
     "type":"text",
     "name":"title",
-    "required":true,
+    "slug":true,
     "validation":"required"
 }
 ```
-### Markdown text.
+#### Markdown text.
 ```JSON
 {
     "title":"Content",
-    "placeholder":"eg. This is a title",
+    "placeholder":"...",
     "type":"markdown",
     "name":"content",
     "required":true,
     "validation":"required"
 }
 ```
-### Media
+#### Media
 ```JSON
 {
      "title":"Image",
-     "placeholder":"eg. This is a title",
+     "placeholder":"...",
      "type":"media",
      "name":"picture",
      "required":true,
      "validation":"required"
 }
 ```
-### Attachment
+#### Attachment
 ```JSON
 {
      "title":"attachment",
-     "placeholder":"eg. This is a title",
+     "placeholder":"...",
      "type":"media",
      "name":"pdf",
      "required":false,
      "function": ["attachment"]
 }
 ```
-### Button
-```JSON
-{
-    "title":"Button",
-    "placeholder":"eg. Text button",
-    "type":"text",
-    "name":"button"
-}
-```
-### Video
-```JSON
-{
-    "title":"Video",
-    "placeholder":"Youtube URL, for instance:  https://www.youtube.com/embed/ljMy9C5dEfE",
-    "type":"text",
-    "name":"video"
-  }
-```
-### Dates
-You can also use as name `published_at` then it will be stored directly inside the `published_at` column instead of inside the data json column.
-```JSON
-{
-     "title":"Publicatiedatum",
-     "placeholder":"eg. 2022-12-31",
-     "type":"date",
-     "name":"date",
-     "required":true,
-     "function": {"format":"yyyy-mm-dd"},
-     "validation":"required"
-}       
-```
-
-
-
 
 # Front-end Integration
+When you'll store a document eg. based on the selected `module`. All content will be stored inside the `data` column. This column is filled with the module's JSON values. 
 
-### Translations   
-By default jellyfish will recognize laravel's running language. You can also force it to another language.
-
+#### Query stuff from your modules.
+It's just Laravel, we did only the first few steps. So use the static function `Jelly::Module('MODULENAME')->{Query}`. On the background we take the `Content` model and query by type `->where('type','MODALNAME')`. 
 ```php
-{{Trans::get('home.title')}} // Most basic.
-{{Trans::get('home.title','nl')}} // With language.
-{{Trans::get('home.title','nl','lorem:10')}} // With language + Lorem Ipsum.
-{{Trans::get('home.title',null,'lorem:10')}} // No language.
-```
-
-### Query stuff from your modules.
-
-```
+// example 1.
 @foreach(Jelly::Module('articles')->get() as $article)
-	<li>{{var_dump($article->data(true))}}</li>
+	<li>{{var_dump($article->data)}}</li>
 @endforeach
-```
-### Images
 
+// example 2.
+$content = Jelly::Module('articles')->where('data->slug',$slug)->firstOrFail();
+
+// example 3.
+$content = Jelly:Module('articles')->where('data->code','7465')->first();
+echo $content->created_at;
+echo $content->data->title;
+```
+#### Images
+Jellyfish supports a wide range of supporting images and image-caching.
 ```html
-<img width="100" src="{{route('img',[$item->data()->picture,'size=100x100'])}}"/>
+<!-- Where 'picture' is field's name.) -->
+<img src="{{route('img',[$item->picture,'size=100x100'])}}"/>
 ```
 
 ### Using Markdown field
-When using the markdown field add a convert to HTML to use all the options like Boldtext, Italic and Heading.
+When using the markdown field add the `Markdown::convertToHtml()` function to convert markdown into HTML format.
 ```html
 {!! Markdown::convertToHtml($data->data()->content) !!}
 ```
@@ -196,22 +173,23 @@ JellyAuth::User()->name // Get name
 JellyAuth::User()->email // Get email
 
 ```
-### Show content by Date (last x amount made)
 
-You can show the last x amount of records that ware made by using the Dates module
+# Translations   
+By default jellyfish will recognize laravel's running language. You can also force it to another language.
 
-**For example:**
 ```php
-@foreach(Jelly::Module('blog')->orderBy('id','desc')->limit(3)->get() as $article)
-  {{Carbon::parse($article->data()->created_at)->format('d-m-Y')}}
-  <a href="/article/{{$article->data()->id}}">{{$article->data()->title}}</a>
-@endforeach
-
+{{Trans::get('home.title')}} // Most basic.
+{{Trans::get('home.title','nl')}} // With language.
+{{Trans::get('home.title','nl','lorem:10')}} // With language + Lorem Ipsum.
+{{Trans::get('home.title',null,'lorem:10')}} // No language.
 ```
 
-# Development
 
-## Webpack
+# On development environments
+
+When you want to change this package from the `vendor` folder. `composer require pinkwhalenl/jellyfish dev-master --prefer-source`
+
+#### Webpack
 
 For compiling assets. Move the Sass, JS & fonts folder into your `resources/assets` folder structure.
 
