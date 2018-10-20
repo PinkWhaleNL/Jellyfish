@@ -32,6 +32,7 @@
 		@endsection
 	@else
 	<p class="help-block"><strong>Je Slug:</strong> {{isset($old[$value->name.'_slug']) && !empty($old[$value->name.'_slug']) ? old($value->name.'_slug') : isset($db[$value->name.'_slug']) ? $db[$value->name.'_slug'] : null}}</p>
+	<input type="hidden" id="{{$value->name}}_slug" onkeyup="updateSlug()" name="{{ $value->name??null }}_slug" value="{{isset($old[$value->name.'_slug']) && !empty($old[$value->name.'_slug']) ? old($value->name.'_slug') : isset($db[$value->name.'_slug']) ? $db[$value->name.'_slug'] : null}}"/>
 	@endif
 
 	{!! $errors->first($value->name, '<p class="help-block">:message</p>') !!}
