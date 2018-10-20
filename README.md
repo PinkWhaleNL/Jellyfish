@@ -1,4 +1,19 @@
-# JellyFish - Easy CMS system.
+# JellyFish
+Most easy and dynamic Laravel CMS with build-in Language, User & media management. All `modules` need to be cofigured.
+
+
+
+**Overview:**   
+[1. Installation](#installing-website)     
+[2. Sitemap Generator](#sitemap-generator)    
+[3. Template Information](#template-information)  
+[4. Blade Structure](#blade-structure)  
+[5. Available blade sections](#available-sections)  
+[6. Customize styling](#customize-styling)  
+[7. Cookie Modal](#cookie-modal)    
+[8. Countdown Settings](#countdown)
+[9. Singing up form](#signup)
+
 
 # Install package
 1. First install `composer require pinkwhalenl/jellyfish`.
