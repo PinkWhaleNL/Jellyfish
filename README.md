@@ -5,6 +5,8 @@ Most easy and dynamic Laravel CMS with build-in Language, User & media managemen
 [Requirements](#requirements)  
 [Installation](#installation)    
 [Dynamic Content](#dynamic-content)  
+   [1. Add Module](#set-up-your-first-module)  
+
 
 # Requirements
 
