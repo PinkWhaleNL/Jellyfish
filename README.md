@@ -2,8 +2,20 @@
 Most easy and dynamic Laravel CMS with build-in Language, User & media management. With `modules` you can build your own backend page witf pre-configured fields like eg. `text`, `textarea`, `select` etc. All fields will be stored inside a JSON column of the `jelly_types` table. Each page will be stored inside `jelly_content` table. On the front-end you can query them by using the `Jelly` static class like; `Jelly::Module('categories')->get()`.   
 
 **Overview:**   
-[1. Installation](#installation)  
+[1. Requirements](#requirements)     	
+[2. Installation](#installation)  
 
+# Requirements
+
+- Laravel 5.7.* (or higher)
+- PHP 7.1 (or higher)
+- Pre-configured DB (with no other Jellyfish installation inside)
+
+## Packages
+```
+"graham-campbell/markdown": "^10.0",
+"intervention/image": "^2.4"
+```
 
 # Installation
 1. First install `composer require pinkwhalenl/jellyfish`.
