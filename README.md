@@ -29,6 +29,18 @@ Most easy and dynamic Laravel CMS with build-in Language, User & media managemen
 5. Go to `https://{YOURDOMAIN}}.com/backend`.
 6. Sign-in with the default credentials; `info@pinkwhale.io` & `secret`.
 
+# Database understanding.
+Inside the `jelly_types` table, will stored all `module` information like the fields.
+```
+id (unique) | sort(int) | type (module name) | title | data (all fields) | publish_date
+```
+
+Inside the `jelly_content` table, all document/pages are stored. Referenced with `type` to an `module`.  
+**Table: `jelly_content`**
+```
+id (unique) | sort(int) | type (module name) | data (json as longText) | published_at | created_at | updated_at
+```
+
 # Dynamic content
 Modules are like MySQL database tables, you'll define columns inside `modules` to structure you data and grouping them. On the Admin side of this platform you can add `fields` into you JSON file, and by telling each field what to do you'll get a customer friendly form. When you finished you're `module` you can start adding some documents from the navigation bar.
 
@@ -137,17 +149,23 @@ You can also use as name `published_at` then it will be stored directly inside t
 ```
 
 # Front-end Integration
+When you'll store a document eg. based on the selected `module`. All content will be stored inside the `data` column. This column is filled with the module's JSON values. 
 
 #### Query stuff from your modules.
 It's just Laravel, we did only the first few steps. So use the static function `Jelly::Module('MODULENAME')->{Query}`. On the background we take the `Content` model and query by type `->where('type','MODALNAME')`. 
 ```php
 // example 1.
 @foreach(Jelly::Module('articles')->get() as $article)
-	<li>{{var_dump($article->data(true))}}</li>
+	<li>{{var_dump($article->data)}}</li>
 @endforeach
 
 // example 2.
 $content = Jelly::Module('articles')->where('data->slug',$slug)->firstOrFail();
+
+// example 3.
+$content = Jelly:Module('articles')->where('data->code','7465')->first();
+echo $content->created_at;
+echo $content->data->title;
 ```
 #### Images
 Jellyfish supports a wide range of supporting images and image-caching.
