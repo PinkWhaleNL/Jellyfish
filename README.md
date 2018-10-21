@@ -2,27 +2,24 @@
 Most easy and dynamic Laravel CMS with build-in Language, User & media management. With `modules` you can build your own backend page witf pre-configured fields like eg. `text`, `textarea`, `select` etc. All fields will be stored inside a JSON column of the `jelly_types` table. Each page will be stored inside `jelly_content` table. On the front-end you can query them by using the `Jelly` static class like; `Jelly::Module('categories')->get()`.   
 
 **Overview:**   
-[Requirements](#requirements)   
-[Installation](#installation)  
-[Upgrade guide](#upgrade-guide)  
-
-[Dynamic Content](#dynamic-content)  
-- [Add Module](#add-module)    
-- [Available fields](#available-fields)  
-	- [Text field](#text)  
-	- [Markdown field](#markdown)  
-	- [Media field](#media)  
-	- [Attachment field](#attachment)  
-	
-[Front-end Usage](#front-end-usage)  
-	- [Get document from selected module](#get-document-from-selected-module)  
-	- [Print Images](#print-images)  
-	- [Using Markdown field](#using-markdown-field)    
-	- [Using Markdown field](#using-markdown-field)  
-
-[Authentication](#authentication)  
-[Translations](#translations)  
-[Development](#on-development-environments)  
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Upgrade guide](#upgrade-guide)
+- [Dynamic Content](#dynamic-content)
+- [Add Module](#add-module)
+- [Available fields](#available-fields)
+	- [Text field](#text)
+	- [Markdown field](#markdown)
+	- [Media field](#media)
+	- [Attachment field](#attachment)
+- [Front-end Usage](#front-end-usage)
+	- [Get document from selected module](#get-document-from-selected-module)
+	- [Print Images](#print-images)
+	- [Using Markdown field](#using-markdown-field)
+	- [Using Markdown field](#using-markdown-field)
+- [Authentication](#authentication)
+- [Translations](#translations)
+- [Development](#on-development-environments)
 
 
 # Requirements
