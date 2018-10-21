@@ -169,6 +169,8 @@ public function store(){
         'name' => request()->name,
 	'email' => request()->email
     ]);
+    
+    return redirect()->route('ROUTENAME')->with('alert','success');
 }
 ```
 
