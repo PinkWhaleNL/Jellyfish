@@ -17,7 +17,7 @@ Most easy and dynamic Laravel CMS with build-in Language, User & media managemen
 	- [Print Images](#print-images)
 	- [Using Markdown field](#using-markdown-field)
 	- [Using Markdown field](#using-markdown-field)
-- [Forms](#forms)
+- [Store your Forms](#store-forms)
 - [Authentication](#authentication)
 - [Translations](#translations)
 - [Development](#on-development-environments)
@@ -149,7 +149,7 @@ When using the markdown field add the `Markdown::convertToHtml()` function to co
 {!! Markdown::convertToHtml($data->data()->content) !!}
 ```
 
-# Forms
+# Store Forms
 CMS stores and let you manage your form data. See example below; 
 ```php
 // ExampleController.php
