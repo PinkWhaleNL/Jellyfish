@@ -10,7 +10,7 @@ Most easy and dynamic Laravel CMS with build-in Language, User & media managemen
 - [Available fields](#available-fields)
 	- [Text field](#text)
 	- [Markdown field](#markdown)
-	- [Media field](#media)
+	- [Picture field](#picture)
 	- [Attachment field](#attachment)
 - [Front-end Usage](#front-end-usage)
 	- [Get document from selected module](#get-document-from-selected-module)
@@ -91,7 +91,8 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
     "validation":"required"
 }
 ```
-#### Media
+#### Picture
+This field let you select an image from the Media library.
 ```JSON
 {
      "title":"Image",
@@ -103,6 +104,7 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
 }
 ```
 #### Attachment
+This field let you select an file from the Media library.
 ```JSON
 {
      "title":"attachment",
