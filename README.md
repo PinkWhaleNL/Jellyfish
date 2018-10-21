@@ -17,6 +17,7 @@ Most easy and dynamic Laravel CMS with build-in Language, User & media managemen
 	- [Print Images](#print-images)
 	- [Using Markdown field](#using-markdown-field)
 	- [Using Markdown field](#using-markdown-field)
+- [Forms](#forms)
 - [Authentication](#authentication)
 - [Translations](#translations)
 - [Development](#on-development-environments)
@@ -147,6 +148,30 @@ When using the markdown field add the `Markdown::convertToHtml()` function to co
 ```html
 {!! Markdown::convertToHtml($data->data()->content) !!}
 ```
+
+# Forms
+CMS stores and let you manage your form data. See example below; 
+```php
+// ExampleController.php
+use JellyForms;
+
+public function store(){
+    // Validate
+    request()->validate([
+        'name' => 'required',
+    ]);
+    
+    // Store
+    JellyFroms::put('contact_form',request()->all());
+    
+    // Store -> Alternatice
+    JellyForms::put('contact_form',[
+        'name' => request()->name,
+	'email' => request()->email
+    ]);
+}
+```
+
 
 # Authentication
 
