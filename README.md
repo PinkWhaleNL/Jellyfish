@@ -185,20 +185,3 @@ By default jellyfish will recognize laravel's running language. You can also for
 # On development environments
 
 When you want to change this package from the `vendor` folder. `composer require pinkwhalenl/jellyfish dev-master --prefer-source`
-
-#### Webpack
-
-For compiling assets. Move the Sass, JS & fonts folder into your `resources/assets` folder structure.
-
-```javascript
-mix.sass('resources/assets/sass/jelly_auth.scss', 'public/css');
-mix.sass('resources/assets/sass/jelly_default.scss', 'public/css');
-mix.js('resources/assets/js/jelly_auth.js', 'public/js');
-mix.js('resources/assets/js/jelly_default.js', 'public/js');
-
-mix.copyDirectory('public/css', 'vendor/pinkwhalenl/jellyfish/src/assets/builds/css');
-mix.copyDirectory('public/js', 'vendor/pinkwhalenl/jellyfish/src/assets/builds/js');
-mix.copyDirectory('public/fonts', 'vendor/pinkwhalenl/jellyfish/src/assets/fonts');
-```
-
-
