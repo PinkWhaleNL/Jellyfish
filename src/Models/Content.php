@@ -11,6 +11,26 @@ class Content extends Model
     protected $casts = [
         'data' => 'object',
     ];
+
+    /**
+     * OLD
+     *
+     * @param boolean $arr
+     * @return void
+     */
+    public function data($arr = false)
+    {
+        $merge = array_merge((array)$this->data, [
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'id'         => $this->id,
+            'type'       => $this->type,
+        ]);
+        if ($arr == false) {
+            return (object) $merge;
+        }
+        return (array) $merge;
+    }
     
     /**
      * Query stuff based on type.

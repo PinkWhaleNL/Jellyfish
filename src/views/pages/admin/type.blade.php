@@ -40,9 +40,9 @@
 							<input type="text" class="form-control" name="type" value="{{old('type')??($data->type??null)}}"/><br>
 						</div>
 						{{csrf_field()}}
-						<div id="editor">{{old('json')??($data->data??null)}}</div>
+						<div id="editor"></div>
 						<br>
-						<textarea name="json" class="hidden">{{old('json')??($data->data??null)}}</textarea>
+						<textarea id="json_area" name="json" class="hidden">{{old('json')??json_encode($data->data??'{}')}}</textarea>
 						<input type="submit" class="btn btn-primary" value="Opslaan"/>
 					</form>
 				</div>
@@ -55,8 +55,22 @@
 					editor.setTheme("ace/theme/monokai");
 					editor.getSession().setMode("ace/mode/json");
 					editor.getSession().on('change', function(){
-						$('textarea[name=json]').val(editor.getSession().getValue());
+						var FromEditor = editor.getSession().getValue();
+						//var ToString = JSON.stringify(FromEditor);
+						var NewValue = FromEditor.replace(/(\r\n|\n|\r)/gm, '').replace(/\s+/g," ");
+						$('textarea[name=json]').val(NewValue);
 					});
+
+					function prettyPrint() {
+						var ugly = document.getElementById('json_area').value;
+						var obj = JSON.parse(ugly);
+						var pretty = JSON.stringify(obj, undefined, 4);
+						document.getElementById('json_area').value = pretty;
+						editor.setValue(pretty);
+					}
+
+					prettyPrint();
+
 				</script>
 				<!-- END -->
 			</div>

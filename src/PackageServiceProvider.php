@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 namespace Pinkwhale\Jellyfish;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 
-class PackageServiceProvider extends ServiceProvider {
+class PackageServiceProvider extends ServiceProvider
+{
 
     /**
      * @var string
@@ -50,17 +51,18 @@ class PackageServiceProvider extends ServiceProvider {
         $this->app->register('Intervention\Image\ImageServiceProvider');
         $this->app->register('GrahamCampbell\Markdown\MarkdownServiceProvider');
 
-        AliasLoader::getInstance()->alias('Trans','Pinkwhale\Jellyfish\Models\Translations');
-        AliasLoader::getInstance()->alias('Jelly','Pinkwhale\Jellyfish\Models\Content');
-        AliasLoader::getInstance()->alias('JellyAuth','Pinkwhale\Jellyfish\Models\Users');
-        AliasLoader::getInstance()->alias('Image','Intervention\Image\Facades\Image');
-        AliasLoader::getInstance()->alias('Carbon','Carbon\Carbon');
-        AliasLoader::getInstance()->alias('Markdown','GrahamCampbell\Markdown\Facades\Markdown');
+        AliasLoader::getInstance()->alias('Trans', 'Pinkwhale\Jellyfish\Models\Translations');
+        AliasLoader::getInstance()->alias('Jelly', 'Pinkwhale\Jellyfish\Models\Content');
+        AliasLoader::getInstance()->alias('JellyAuth', 'Pinkwhale\Jellyfish\Models\Users');
+        AliasLoader::getInstance()->alias('JellyForms', 'Pinkwhale\Jellyfish\Models\Forms');
+        AliasLoader::getInstance()->alias('JellyPreferences', 'Pinkwhale\Jellyfish\Models\Preferences');
+        AliasLoader::getInstance()->alias('Image', 'Intervention\Image\Facades\Image');
+        AliasLoader::getInstance()->alias('Carbon', 'Carbon\Carbon');
+        AliasLoader::getInstance()->alias('Markdown', 'GrahamCampbell\Markdown\Facades\Markdown');
 
         $this->mergeConfigFrom(
-            __DIR__.'/config/config.php', $this->packageName
+            __DIR__.'/config/config.php',
+            $this->packageName
         );
-
     }
-
 }

@@ -31,6 +31,7 @@
 					<li{{in_array(request()->route()->getName(),['jelly-dashboard'])?' class=active':null}}><a href="{{route('jelly-dashboard')}}">Dashboard</a></li>
 					<li{{in_array(request()->route()->getName(),['jelly-translations','jelly-translation-create','jelly-translation'])?' class=active':null}}><a href="{{route('jelly-translations')}}">Vertalingen</a></li>
 					<li{{in_array(request()->route()->getName(),['jelly-media'])?' class=active':null}}><a href="{{route('jelly-media')}}">Media</a></li>
+					<li{{in_array(request()->route()->getName(),['jelly-forms'])?' class=active':null}}><a href="{{route('jelly-forms')}}">Formulieren</a></li>
 
 
 					<li class="dropdown">
@@ -49,8 +50,9 @@
 
 							@if(JellyAuth::IsAdmin())
 							<li role="separator" class="divider"></li>
-								<li><a href="{{route('jelly-admin-users')}}"><b>Admin - </b>Manage users</a></li>
+								<li><a href="{{route('jelly-admin-users')}}"><b>Admin - </b>Beheer gebruikers</a></li>
 							<li><a href="{{route('jelly-admin-types')}}"><b>Admin - </b>Modules</a></li>
+							<li><a href="{{route('jelly-admin-preferences')}}"><b>Admin - </b>Instellingen</a></li>
 							@endif
 							<li role="separator" class="divider"></li>
 							<li><a href="{{route('jelly-logout')}}">Uitloggen</a></li>

@@ -10,6 +10,8 @@ use Pinkwhale\Jellyfish\Models\Users;
 use Illuminate\Validation\Rule;
 use Validator;
 use Hash;
+use Pinkwhale\Jellyfish\Models\Preferences;
+use JellyForms;
 
 class AdminController extends Controller
 {
@@ -18,16 +20,18 @@ class AdminController extends Controller
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function redirect(){
+    public function redirect()
+    {
         return redirect()->route('jelly-admin-types');
     }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index_types(){
+    public function index_types()
+    {
         $this->info['types'] = (new Types)->all();
-        return view('jf::pages.admin.types',$this->info);
+        return view('jf::pages.admin.types', $this->info);
     }
 
     /**
@@ -35,9 +39,10 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show_type($id){
-        $this->info['data'] = ($id != 'new'?(new Types)->where('id',$id)->firstOrFail():[]);
-        return view('jf::pages.admin.type',$this->info);
+    public function show_type($id)
+    {
+        $this->info['data'] = ($id != 'new'?(new Types)->where('id', $id)->firstOrFail():[]);
+        return view('jf::pages.admin.type', $this->info);
     }
 
     /**
@@ -45,18 +50,18 @@ class AdminController extends Controller
      *
      * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function store_type($id){
-
-        if(!(new Types)->isJson(request()->json)){
+    public function store_type($id)
+    {
+        if (!(new Types)->isJson(request()->json)) {
             return back()->withInput();
         }
 
-        $type = ($id != 'new'?(new Types)->where('id',$id)->firstOrFail():(new Types));
+        $type = ($id != 'new'?(new Types)->where('id', $id)->firstOrFail():(new Types));
         $type->sortable = (request()->sortable === 'true'? true: false);
         $type->publish_date = (request()->publish_date === 'true'? true: false);
         $type->type = str_slug(request()->type);
         $type->title = request()->title;
-        $type->data = request()->json;
+        $type->data = json_decode(request()->json);
         $type->save();
 
         return redirect()->route('jelly-admin-types');
@@ -67,9 +72,9 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy_type($id){
-
-        $type = (new Types)->where('id',$id)->first();
+    public function destroy_type($id)
+    {
+        $type = (new Types)->where('id', $id)->first();
         (new Content)->where('type', $type->type)->delete();
         $type->delete();
         return redirect()->route('jelly-admin-types');
@@ -78,11 +83,10 @@ class AdminController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function list_users(){
-
+    public function list_users()
+    {
         $this->info['users'] = (new Users)->get();
-        return view('jf::pages.admin.users',$this->info);
-
+        return view('jf::pages.admin.users', $this->info);
     }
 
     /**
@@ -90,12 +94,13 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show_user($id){
+    public function show_user($id)
+    {
         $this->info['user'] = [];
-        if($id != 'new'){
-            $this->info['user'] = (new Users)->where('id',$id)->first();
+        if ($id != 'new') {
+            $this->info['user'] = (new Users)->where('id', $id)->first();
         }
-        return view('jf::pages.admin.user',$this->info);
+        return view('jf::pages.admin.user', $this->info);
     }
 
     /**
@@ -103,18 +108,17 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store_user($id){
-
-        if($id == 'new'){
-            Validator::make(request()->all(),[
+    public function store_user($id)
+    {
+        if ($id == 'new') {
+            Validator::make(request()->all(), [
                 'name' => 'required',
                 'rank' => 'required',
                 'email' => 'required|email|unique:jelly_users,email',
                 'password' => 'required',
             ])->validate();
-
-        } else{
-            Validator::make(request()->all(),[
+        } else {
+            Validator::make(request()->all(), [
                 'name' => 'required',
                 'rank' => 'required',
                 'email' => [
@@ -124,12 +128,12 @@ class AdminController extends Controller
             ])->validate();
         }
 
-        $user = ($id != 'new' ? (new Users)->where('id',$id)->firstOrFail() : (new Users));
+        $user = ($id != 'new' ? (new Users)->where('id', $id)->firstOrFail() : (new Users));
         $user->name = request()->name;
         $user->email = request()->email;
         $user->rank = request()->rank;
 
-        if($id == 'new' || isset(request()->password)){
+        if ($id == 'new' || isset(request()->password)) {
             $user->password = Hash::make(request()->password);
         }
 
@@ -143,8 +147,48 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy_user($id){
-        (new Users)->where('id',$id)->delete();
+    public function destroy_user($id)
+    {
+        (new Users)->where('id', $id)->delete();
         return redirect()->route('jelly-admin-users')->with(['message' => ['state' => 'success', 'message' => 'Gebruiker is verwijderd!']]);
+    }
+
+
+    /**
+     * Preferences view for Admin's
+     *
+     * @return void
+     */
+    public function show_preferences()
+    {
+        $this->info['preferences'] = [];
+        foreach ((new Preferences)->get() as $value) {
+            $this->info['preferences'][strtolower($value->key)] = $value->data;
+        }
+        
+        return view('jf::pages.admin.preferences', $this->info);
+    }
+
+    /**
+     * Save key based preferences.
+     *
+     * @return void
+     */
+    public function store_preferences()
+    {
+        $data = request()->all();
+        unset($data['_token']);
+
+        foreach ($data as $key=>$item) {
+            $q = (new Preferences);
+
+            // Check if entity exists.
+            $q = ($q->where('key', strtoupper($key))->count()>0?$q->where('key', strtoupper($key))->first():$q);
+            $q->key = strtoupper($key);
+            $q->data = $item;
+            $q->save();
+        }
+
+        return redirect()->route('jelly-admin-preferences')->with(['message' => ['state' => 'success', 'message' => 'Opgeslagen']]);
     }
 }

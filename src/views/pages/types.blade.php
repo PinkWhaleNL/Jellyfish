@@ -24,8 +24,8 @@
 						@if($data->sortable == true)
 						<td>Rangschikking</td>
 						@endif
-						@foreach(array_slice($data->data->fields,0,3) as $item)
-					 	<td>{{$item->title}}</td>
+						@foreach(array_slice($data->data->fields??[],0,3) as $item)
+					 	<td>{{$item->title??null}}</td>
 						@endforeach
 						<td align="right" width="150">Laatste update</td>
 						<td align="right" width="150"></td>
@@ -45,9 +45,9 @@
 									$content = (array)$doc->data;
 								@endphp
 
-								@if($item->type == 'markdown')
-								<td>{{str_limit(strip_tags(Markdown::convertToHtml(($content[$name]??null))),40)}}</td>
-								@elseif($item->type == 'media')
+									@if($item->type == 'markdown')
+									<td>{{str_limit(strip_tags(Markdown::convertToHtml(($content[$name]??null))),40)}}</td>
+									@elseif($item->type == 'media')
 									@php
 										$file = (new \Pinkwhale\Jellyfish\Models\Media)->where('id',($content[$name]??null))->first();
 									@endphp
