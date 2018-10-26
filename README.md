@@ -10,6 +10,8 @@ Most easy and dynamic Laravel CMS with build-in Language, User & media managemen
 - [Available fields](#available-fields)
 	- [Text field](#text)
 	- [Markdown field](#markdown)
+	- [Select field](#select-options)
+	- [List document from Module field](#item-from-other-module)
 	- [Picture field](#picture)
 	- [Attachment field](#attachment)
 - [Front-end Usage](#front-end-usage)
@@ -91,6 +93,35 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
     "required":true,
     "validation":"required"
 }
+```
+#### Select options
+```JSON
+{
+    "title": "Select",
+    "placeholder": "Pick a options",
+    "type": "select",
+    "name": "language",
+    "options": [
+        "Nederlands",
+        "Engels"
+    ]
+},
+```
+#### Item from other Module
+This field will list other modules with a selected column. The document unique ID will be stored inside this field.
+
+```JSON
+{
+    "title": "Written By",
+    "type": "module",
+    "name": "writtenby",
+    "required": true,
+    "function": {
+        "module": "employees",
+        "field": "name"
+    },
+    "validation": "required"
+},
 ```
 #### Picture
 This field let you select an image from the Media library.

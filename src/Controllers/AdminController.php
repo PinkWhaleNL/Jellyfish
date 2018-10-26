@@ -55,7 +55,6 @@ class AdminController extends Controller
         if (!(new Types)->isJson(request()->json)) {
             return back()->withInput();
         }
-
         $type = ($id != 'new'?(new Types)->where('id', $id)->firstOrFail():(new Types));
         $type->sortable = (request()->sortable === 'true'? true: false);
         $type->publish_date = (request()->publish_date === 'true'? true: false);
