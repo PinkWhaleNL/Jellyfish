@@ -2,49 +2,47 @@
 Most easy and dynamic Laravel CMS with build-in Language, User & media management. With `modules` you can build your own backend page witf pre-configured fields like eg. `text`, `textarea`, `select` etc. All fields will be stored inside a JSON column of the `jelly_types` table. Each page will be stored inside `jelly_content` table. On the front-end you can query them by using the `Jelly` static class like; `Jelly::Module('categories')->get()`.   
 
 **Overview:**   
-[Requirements](#requirements)  
-[Installation](#installation)    
-[Dynamic Content](#dynamic-content)  
--> [Add Module](#set-up-your-first-module)    
--> [Available fields](#available-fields) 
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Upgrade guide](#upgrade-guide)
+- [Dynamic Content](#dynamic-content)
+- [Add Module](#add-module)
+- [Available fields](#available-fields)
+	- [Text field](#text)
+	- [Markdown field](#markdown)
+	- [Picture field](#picture)
+	- [Attachment field](#attachment)
+- [Front-end Usage](#front-end-usage)
+	- [Get document from selected module](#get-document-from-selected-module)
+	- [Print Images](#print-images)
+	- [Using Markdown field](#using-markdown-field)
+	- [Using Markdown field](#using-markdown-field)
+- [Store your Forms](#store-forms)
+- [Authentication](#authentication)
+- [Translations](#translations)
+- [Development](#on-development-environments)
 
 
 # Requirements
-
 - Laravel 5.7.* (or higher)
 - PHP 7.1 (or higher)
 - Pre-configured DB (Supporting JSON columns)
 
-## Packages
-```
-"graham-campbell/markdown": "^10.0",
-"intervention/image": "^2.4"
-```
+# Upgrade guide
+*No `data()` needed anymore* to get your field data from a document. Now you can do `$result->data->title`. Also you can query inside the `data` column of the `jelly_content` table. Please update your code, in the next versions `data()` function will be removed.
 
-## Installation
-1. First install `composer require pinkwhalenl/jellyfish`.
+# Installation
+1. Run `composer require pinkwhalenl/jellyfish`.
 2. Be sure your `.env` file is configured (DB).
 3. Publish the config, css,js & font files `php artisan vendor:publish`.
 4. Run the new migrations `php artisan migrate`.
 5. Go to `https://{YOURDOMAIN}}.com/backend`.
 6. Sign-in with the default credentials; `info@pinkwhale.io` & `secret`.
 
-# Database understanding.
-Inside the `jelly_types` table, will stored all `module` information like the fields.
-```
-id (unique) | sort(int) | type (module name) | title | data (all fields) | publish_date
-```
-
-Inside the `jelly_content` table, all document/pages are stored. Referenced with `type` to an `module`.  
-**Table: `jelly_content`**
-```
-id (unique) | sort(int) | type (module name) | data (json as longText) | published_at | created_at | updated_at
-```
-
 # Dynamic content
 Modules are like MySQL database tables, you'll define columns inside `modules` to structure you data and grouping them. On the Admin side of this platform you can add `fields` into you JSON file, and by telling each field what to do you'll get a customer friendly form. When you finished you're `module` you can start adding some documents from the navigation bar.
 
-### Set-up an Module
+### Add Module
 1. Click on the right top side on your username. 
 2. Click on `admin - Modules`. 
 3. Click on `Create new Module`.
@@ -71,7 +69,7 @@ Jelly::Module('example')->orderBy('published_at','desc')->get();
 
 In each field you can still manage your validation rules brought from Laravel with the key `validation`. Also their are some functions to specify how the data will be stored inside your DB. Also has each `field` his own Options. So please check the documentation below.
 
-#### Text field.
+#### Text
 When you'll using a text field for title purposes, you can als add `"slug":true`. The system will automatically add the field `{name}_slug`. Note; you cannot change this afterwards when a document is already saved!
 ```JSON
 {
@@ -83,7 +81,7 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
     "validation":"required"
 }
 ```
-#### Markdown text.
+#### Markdown
 ```JSON
 {
     "title":"Content",
@@ -94,7 +92,8 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
     "validation":"required"
 }
 ```
-#### Media
+#### Picture
+This field let you select an image from the Media library.
 ```JSON
 {
      "title":"Image",
@@ -106,6 +105,7 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
 }
 ```
 #### Attachment
+This field let you select an file from the Media library.
 ```JSON
 {
      "title":"attachment",
@@ -117,10 +117,10 @@ When you'll using a text field for title purposes, you can als add `"slug":true`
 }
 ```
 
-# Front-end Integration
+# Front-end usage
 When you'll store a document eg. based on the selected `module`. All content will be stored inside the `data` column. This column is filled with the module's JSON values. 
 
-#### Query stuff from your modules.
+#### Get document from selected module
 It's just Laravel, we did only the first few steps. So use the static function `Jelly::Module('MODULENAME')->{Query}`. On the background we take the `Content` model and query by type `->where('type','MODALNAME')`. 
 ```php
 // example 1.
@@ -136,7 +136,7 @@ $content = Jelly:Module('articles')->where('data->code','7465')->first();
 echo $content->created_at;
 echo $content->data->title;
 ```
-#### Images
+#### Print images
 Jellyfish supports a wide range of supporting images and image-caching.
 ```html
 <!-- Where 'picture' is field's name.) -->
@@ -149,7 +149,33 @@ When using the markdown field add the `Markdown::convertToHtml()` function to co
 {!! Markdown::convertToHtml($data->data()->content) !!}
 ```
 
-### Authentications.
+# Store Forms
+CMS stores and let you manage your form data. See example below; 
+```php
+// ExampleController.php
+use JellyForms;
+
+public function store(){
+    // Validate
+    request()->validate([
+        'name' => 'required',
+    ]);
+    
+    // Store
+    JellyFroms::put('contact_form',request()->all());
+    
+    // Store -> Alternatice
+    JellyForms::put('contact_form',[
+        'name' => request()->name,
+	'email' => request()->email
+    ]);
+    
+    return redirect()->route('ROUTENAME')->with('alert','success');
+}
+```
+
+
+# Authentication
 
 You can check if a user has signed in by typing `JellyAuth::Check()` this functions returns `true/false`. You can also get all user's information by using the `User()` function like; `JellyAuth::User()`. When you want to know if an user has `admin-access` then type; `JellyAuth::IsAdmin()`, this also returns `true/false`.
 
@@ -188,20 +214,3 @@ By default jellyfish will recognize laravel's running language. You can also for
 # On development environments
 
 When you want to change this package from the `vendor` folder. `composer require pinkwhalenl/jellyfish dev-master --prefer-source`
-
-#### Webpack
-
-For compiling assets. Move the Sass, JS & fonts folder into your `resources/assets` folder structure.
-
-```javascript
-mix.sass('resources/assets/sass/jelly_auth.scss', 'public/css');
-mix.sass('resources/assets/sass/jelly_default.scss', 'public/css');
-mix.js('resources/assets/js/jelly_auth.js', 'public/js');
-mix.js('resources/assets/js/jelly_default.js', 'public/js');
-
-mix.copyDirectory('public/css', 'vendor/pinkwhalenl/jellyfish/src/assets/builds/css');
-mix.copyDirectory('public/js', 'vendor/pinkwhalenl/jellyfish/src/assets/builds/js');
-mix.copyDirectory('public/fonts', 'vendor/pinkwhalenl/jellyfish/src/assets/fonts');
-```
-
-
