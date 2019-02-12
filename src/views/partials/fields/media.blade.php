@@ -24,7 +24,7 @@
 
 
 
-		@foreach($list->get() as $file)
+		@foreach($list->orderBt('updated_at','desc')->get() as $file)
 			<option
 				value="{{$file->id}}" data-live-search="true"
 		        data-content="<img height=50 style=margin-right:10px align=left src='{{route('media-picture',[($file->type=='attachment'?'file_':'small_').$file->filename])}}'/> {{$file->title}} ({{Carbon::parse($file->updated_at)->format('d-m-Y')}}) {{$file->alert == true ? '<bR><small style=\'color:orange\'><b>[LETOP]</b> - Afbeelding is te klein voor grote toepassingen. (bv. Banners)</small>' : null}}"
