@@ -8,6 +8,7 @@ use Pinkwhale\Jellyfish\Models\Pages;
 use Pinkwhale\Jellyfish\Models\Translations;
 use Validator;
 use JellyAuth;
+use Str;
 
 class TranslationsController extends Controller {
 
