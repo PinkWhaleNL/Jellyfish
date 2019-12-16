@@ -12,6 +12,7 @@ use Validator;
 use Hash;
 use Pinkwhale\Jellyfish\Models\Preferences;
 use JellyForms;
+use Str;
 
 class AdminController extends Controller
 {
