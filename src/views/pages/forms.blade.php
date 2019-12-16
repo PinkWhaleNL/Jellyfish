@@ -44,7 +44,7 @@
 					<tr>
 						<td>{{ $data->id }}</td>
 						<td>{{ $data->type }}</td>
-						<td>{{ str_limit($data->data[key($data->data)],25,'...') }}</td>
+						<td>{{ Str::limit($data->data[key($data->data)],25,'...') }}</td>
 						<td align="right">{{Carbon::parse($data->created_at)->format('d-m-Y H:i')}}</td>
 							<td align="right">
 								<a href="{{route('jelly-form',[$data->id])}}" class="btn btn-default btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> Weergeven</a>
