@@ -46,7 +46,7 @@
 								@endphp
 
 									@if($item->type == 'markdown')
-									<td>{{str_limit(strip_tags(Markdown::convertToHtml(($content[$name]??null))),40)}}</td>
+									<td>{{Str::limit(strip_tags(Markdown::convertToHtml(($content[$name]??null))),40)}}</td>
 									@elseif($item->type == 'media')
 									@php
 										$file = (new \Pinkwhale\Jellyfish\Models\Media)->where('id',($content[$name]??null))->first();
@@ -59,7 +59,7 @@
 									@endif
 								</td>
 								@else
-								<td>{{str_limit($content[$name]??null,60)}}</td>
+								<td>{{Str::limit($content[$name]??null,60)}}</td>
 								@endif
 							@endforeach
 							<td align="right">{{Carbon::parse($doc->updated_at)->format('d-m-Y H:i')}}</td>
