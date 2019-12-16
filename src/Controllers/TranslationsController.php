@@ -92,7 +92,7 @@ class TranslationsController extends Controller {
             }
 
             $item = (new Translations);
-            $item->key = strtolower(str_slug(request()->key));
+            $item->key = strtolower(Str::slug(request()->key));
             $item->page_id = request()->page_id;
             $item->data = json_encode([]);
             $item->save();
