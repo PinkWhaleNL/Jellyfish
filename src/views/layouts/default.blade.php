@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-
 	<title>{{config('jf.title_browser')}}</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -11766,7 +11766,7 @@ body .table > tbody > tr.middle > td {
   margin-bottom: 0px !important;
   border-radius: 0px;
   border: 0px !important;
-  background: #E20073;
+  background: #506F6F;
 }
 
 .navbar-default .navbar-brand {
@@ -11785,7 +11785,7 @@ body .table > tbody > tr.middle > td {
 }
 
 .navbar-default li.active a {
-  background: #ff49a6 !important;
+  background: #789191 !important;
 }
 
 .navbar-default li.open > a {
@@ -11793,7 +11793,7 @@ body .table > tbody > tr.middle > td {
 }
 
 .navbar-default ul.dropdown-menu li a {
-  color: #f0f !important;
+  color: #789191!important;
 }
 
 section#toolbar {
@@ -11832,7 +11832,7 @@ section#toolbar ul#buttons li a {
 }
 
 section#toolbar ul#buttons li a.btn-primary {
-  background: #E20073;
-  border-color: #E20073;
+  background: #506F6F;
+  border-color: #506F6F;
 }
 
